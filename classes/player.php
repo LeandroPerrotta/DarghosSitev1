@@ -7,7 +7,7 @@
 			- when deleted, goto wait list
 		*/
 		
-		function create($account_id, $group_id, $name, $sex, $vocation) {
+		function create($account_id, $group_id, $name, $sex, $vocation, $rook = false) {
 			switch ($sex) {
 				case 2:
 					$look_type = CONFIG_PLAYERSTARTLOOKTYPEFEMALE;
@@ -28,7 +28,11 @@
 			
 			$data = $this->get("account_id = " . $account_id, "premend", false, null);
 			
-			return $mysql->query("INSERT INTO players VALUES (null, '" . $name . "', " . $account_id . ", " . $group_id . ", " . $data["premend"] . ", " . $sex . ", " . $vocation . ", " . CONFIG_PLAYERSTARTEXP . ", " . CONFIG_PLAYERSTARTLEVEL . ", " . CONFIG_PLAYERSTARTMAGICLEVEL . ", " . CONFIG_PLAYERSTARTHEALTH . ", " . CONFIG_PLAYERSTARTHEALTH . ", " . CONFIG_PLAYERSTARTMANA . ", " . CONFIG_PLAYERSTARTMANA . ", 0, " . CONFIG_PLAYERSTARTSOUL . ", 0, " . CONFIG_PLAYERSTARTLOOKBODY . ", " . CONFIG_PLAYERSTARTLOOKFEET . ", " . CONFIG_PLAYERSTARTLOOKHEAD . ", " . CONFIG_PLAYERSTARTLOOKLEGS . ", " . CONFIG_PLAYERSTARTLOOKTYPE . ", 0, " . CONFIG_PLAYERSTARTPOSX . ", " . CONFIG_PLAYERSTARTPOSY . ", " . CONFIG_PLAYERSTARTPOSZ . ", " . CONFIG_PLAYERSTARTCAP . ", 0, 0, 1, null, 0, 0, null, " . CONFIG_PLAYERSTARTLOSSEXP . ", " . CONFIG_PLAYERSTARTLOSSMANA . ", " . CONFIG_PLAYERSTARTLOSSKILLS . ", " . CONFIG_PLAYERSTARTLOSSITEMS . ", 0, " . CONFIG_PLAYERSTARTTOWNID . ", 0)");
+			if ($rook) {
+				return $mysql->query("INSERT INTO players VALUES (null, '" . $name . "', " . $account_id . ", " . $group_id . ", " . $data["premend"] . ", " . $sex . ", " . $vocation . ", " . CONFIG_PLAYERROOKSTARTEXP . ", " . CONFIG_PLAYERROOKSTARTLEVEL . ", " . CONFIG_PLAYERROOKSTARTMAGICLEVEL . ", " . CONFIG_PLAYERROOKSTARTHEALTH . ", " . CONFIG_PLAYERROOKSTARTHEALTH . ", " . CONFIG_PLAYERROOKSTARTMANA . ", " . CONFIG_PLAYERROOKSTARTMANA . ", 0, " . CONFIG_PLAYERROOKSTARTSOUL . ", 0, " . CONFIG_PLAYERSTARTLOOKBODY . ", " . CONFIG_PLAYERSTARTLOOKFEET . ", " . CONFIG_PLAYERSTARTLOOKHEAD . ", " . CONFIG_PLAYERSTARTLOOKLEGS . ", " . $look_type . ", 0, " . CONFIG_PLAYERROOKSTARTPOSX . ", " . CONFIG_PLAYERROOKSTARTPOSY . ", " . CONFIG_PLAYERROOKSTARTPOSZ . ", " . CONFIG_PLAYERROOKSTARTCAP . ", 0, 0, 1, null, 0, 0, null, " . CONFIG_PLAYERROOKSTARTLOSSEXP . ", " . CONFIG_PLAYERROOKSTARTLOSSMANA . ", " . CONFIG_PLAYERROOKSTARTLOSSKILLS . ", " . CONFIG_PLAYERROOKSTARTLOSSITEMS . ", 0, " . CONFIG_PLAYERROOKSTARTTOWNID . ", 0)");
+			} else {
+				return $mysql->query("INSERT INTO players VALUES (null, '" . $name . "', " . $account_id . ", " . $group_id . ", " . $data["premend"] . ", " . $sex . ", " . $vocation . ", " . CONFIG_PLAYERSTARTEXP . ", " . CONFIG_PLAYERSTARTLEVEL . ", " . CONFIG_PLAYERSTARTMAGICLEVEL . ", " . CONFIG_PLAYERSTARTHEALTH . ", " . CONFIG_PLAYERSTARTHEALTH . ", " . CONFIG_PLAYERSTARTMANA . ", " . CONFIG_PLAYERSTARTMANA . ", 0, " . CONFIG_PLAYERSTARTSOUL . ", 0, " . CONFIG_PLAYERSTARTLOOKBODY . ", " . CONFIG_PLAYERSTARTLOOKFEET . ", " . CONFIG_PLAYERSTARTLOOKHEAD . ", " . CONFIG_PLAYERSTARTLOOKLEGS . ", " . $look_type . ", 0, " . CONFIG_PLAYERSTARTPOSX . ", " . CONFIG_PLAYERSTARTPOSY . ", " . CONFIG_PLAYERSTARTPOSZ . ", " . CONFIG_PLAYERSTARTCAP . ", 0, 0, 1, null, 0, 0, null, " . CONFIG_PLAYERSTARTLOSSEXP . ", " . CONFIG_PLAYERSTARTLOSSMANA . ", " . CONFIG_PLAYERSTARTLOSSKILLS . ", " . CONFIG_PLAYERSTARTLOSSITEMS . ", 0, " . CONFIG_PLAYERSTARTTOWNID . ", 0)");
+			}
 		}
 		
 		function delete($id) {
