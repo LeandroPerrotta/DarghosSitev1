@@ -47,7 +47,7 @@
 			<h1><?php echo CONFIG_SITENAME; ?></h1>
 			
 			<ul id="navigation">
-				<li><a href="#"><?php echo $lang>get(1); ?></a></li>
+				<li><a href="#"><?php echo $lang->get(1); ?></a></li>
 			</ul>
 			
 			<div id="content">

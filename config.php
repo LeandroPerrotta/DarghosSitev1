@@ -1,4 +1,4 @@
-<<?php
+<?php
 	define("CONFIG_SITEADDRESS", "http://darghos.com");
 	define("CONFIG_SITEEMAIL", "contact@darghos.com");
 	define("CONFIG_SITENAME", "Darghos");
