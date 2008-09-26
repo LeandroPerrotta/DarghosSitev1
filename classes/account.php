@@ -1,16 +1,7 @@
 <?php
 	class Account extends Mysql {
-		function create($email, $password) {
-			while (!$id || $data["id"]) {
-				$id = rand(1111111, 9999999);
-				$data = $this->get("id = " . $id, "id");
-			}
-			
-			if ($this->query("INSERT INTO accounts VALUES (" . $id . ", '" . $password . "', '" . $email . "', 0, 0, 0, '" . $this->key() . "')")) {
-				return $id;
-			}
-			
-			return false;
+		function create($id, $email, $password) {
+			return $this->query("INSERT INTO accounts VALUES (" . $id . ", '" . $password . "', '" . $email . "', 0, 0, 0, '" . $this->key() . "')");
 		}
 		
 		function delete($id) {
@@ -19,6 +10,20 @@
 		
 		function get($criteria, $fields = "*", $loop = false, $order = null) {
 			return $this->consult("SELECT " . $fields . " FROM accounts " . ($criteria ? "WHERE " . $criteria : null) . " " . ($order ? "ORDER BY " . $order : null), $loop);
+		}
+		
+		function id() {
+			$id = rand(111111, 999999);
+			
+			do {
+				$data = $this->get("id = " . $id, "id");
+				
+				if ($data) {
+					$id++;
+				}
+			} while ($data["id"]);
+			
+			return $id;
 		}
 		
 		function key() {

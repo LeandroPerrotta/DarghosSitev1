@@ -17,6 +17,8 @@
 				13 => "Your password should have at least 6 characters.",
 				14 => "Your account data",
 				15 => "Hello player of " . CONFIG_SITENAME . ",\nYour account has been successfully created!\n\nBelow follows the details of your account:\nYour account number is: [PLAYER_ACCNUMBER]\nYour password is: [PLAYER_ACCPASSWORD]\n\nTo create you character and start the game visit:\n" . CONFIG_SITEADDRESS . "account\n\nSee you in World of " . CONFIG_SITENAME . "!\n" . CONFIG_SITEOWNER,
+				16 => "Internal error. Please try again.",
+				17 => "Account successfully created. Please check your email.",
 			);
 			
 			return $lang[$id];

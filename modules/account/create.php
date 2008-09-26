@@ -1,3 +1,5 @@
+<h2><?php echo $lang->get(4); ?></h2>
+
 <?php
 	if ($_POST) {
 		foreach ($_POST as $key => $value) {
@@ -20,6 +22,12 @@
 			$error[] = $lang->get(12);
 		}
 		
+		$account_id = $account->id();
+		
+		if (!$core->mail(str_replace(array("[PLAYER_ACCNUMBER]", "[PLAYER_ACCPASSWORD]"), array($account_id, $account_password), $lang->get(15)), CONFIG_SITENAME . " - " . $lang->get(14), $account_email)) {
+			$error[] = $lang->get(16);
+		}
+		
 		if ($error) {
 			echo '<ul class="error">';
 			
@@ -29,14 +37,16 @@
 			
 			echo '</ul>';
 		} else {
-			$account_id = $account->create($account_email, $account_password);
+			$account->create($account_id, $account_email, $account_password);
 			
-			$core->mail(str_replace(array("[PLAYER_ACCNUMBER]", "[PLAYER_ACCPASSWORD]"), array($account_id, $account_password), $lang->get(15)), CONFIG_SITENAME . " - " . $lang->get(14), $account_email);
+			echo '<ul class="success">';
+			
+			echo '<li>' . $lang->get(17) . '</li>';
+			
+			echo '</ul>';
 		}
 	}
 ?>
-
-<h2><?php echo $lang->get(4); ?></h2>
 
 <form action="#" method="post">
 	<fieldset>
