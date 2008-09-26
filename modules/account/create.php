@@ -1,4 +1,4 @@
-<h2><?php echo $lang->get(4); ?></h2>
+<h2><?php echo (!$ajax) ? $lang->get(4) : null; ?></h2>
 
 <?php
 	if ($_POST) {
@@ -22,10 +22,13 @@
 			$error[] = $lang->get(12);
 		}
 		
-		$account_id = $account->id();
-		
-		if (!$core->mail(str_replace(array("[PLAYER_ACCNUMBER]", "[PLAYER_ACCPASSWORD]"), array($account_id, $account_password), $lang->get(15)), CONFIG_SITENAME . " - " . $lang->get(14), $account_email)) {
-			$error[] = $lang->get(16);
+		if (!$error) {
+			$account_id = $account->id();
+			$account_key = $account->key();
+			
+			if (!$core->mail(str_replace(array("[PLAYER_ACCKEY]", "[PLAYER_ACCNUMBER]", "[PLAYER_ACCPASSWORD]"), array($account_key, $account_id, $account_password), $lang->get(15)), CONFIG_SITENAME . " - " . $lang->get(14), $account_email)) {
+				$error[] = $lang->get(16);
+			}
 		}
 		
 		if ($error) {
@@ -37,7 +40,7 @@
 			
 			echo '</ul>';
 		} else {
-			$account->create($account_id, $account_email, $account_password);
+			$account->create($account_id, $account_email, $account_key, $account_password);
 			
 			echo '<ul class="success">';
 			
@@ -45,11 +48,17 @@
 			
 			echo '</ul>';
 		}
+		
+		if ($ajax) {
+			exit();
+		}
 	}
 ?>
 
-<form action="#" method="post">
+<form action="<?php echo $core->url(array($lang->get(1), $lang->get(2))); ?>" class="ajax" method="post">
 	<fieldset>
+		<div id="status"></div>
+		
 		<p>
 			<label for="account_email"><?php echo $lang->get(5); ?></label><br />
 			<input id="account_email" name="account_email" size="40" type="text" value="<?php echo $account_email; ?>" />

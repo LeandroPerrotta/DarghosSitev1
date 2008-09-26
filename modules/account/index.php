@@ -4,6 +4,10 @@
 			include_once("create.php");
 		break;
 		
+		case $lang->get(22):
+			include_once("recover.php");
+		break;
+		
 		case $lang->get(3):
 			include_once("update.php");
 		break;

@@ -33,7 +33,9 @@
 		break;
 	}
 	
-	if ($_POST["ajax"]) {
+	$ajax = $_POST["ajax"];
+	
+	if ($ajax) {
 		include_once($module);
 		exit();
 	}
@@ -47,9 +49,16 @@
 		
 		<title><?php echo CONFIG_SITENAME; ?></title>
 		
-		<link href="<?php $core->url(array("css.css")); ?>" media="screen" rel="stylesheet" type="text/css" />
+		<link href="<?php echo $core->url(array("css.css")); ?>" media="screen" rel="stylesheet" type="text/css" />
 		
-		<script src="<?php $core->url(array("js.js")); ?>" type="text/javascript"></script>
+		<script type="text/javascript">
+			<!--
+				var ajax_error = "<?php echo $lang->get(16); ?>";
+				var site_address = "<?php echo CONFIG_SITEADDRESS; ?>";
+			-->
+		</script>
+		
+		<script src="<?php echo $core->url(array("js.js")); ?>" type="text/javascript"></script>
 	</head>
 	
 	<body>

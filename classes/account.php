@@ -1,7 +1,7 @@
 <?php
 	class Account extends Mysql {
-		function create($id, $email, $password) {
-			return $this->query("INSERT INTO accounts VALUES (" . $id . ", '" . $password . "', '" . $email . "', 0, 0, 0, '" . $this->key() . "')");
+		function create($id, $email, $key, $password) {
+			return $this->query("INSERT INTO accounts VALUES (" . $id . ", '" . $password . "', '" . $email . "', 0, 0, 0, '" . $key . "')");
 		}
 		
 		function delete($id) {
