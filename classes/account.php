@@ -2,7 +2,7 @@
 	class Account extends Mysql {
 		function create($email, $password) {
 			while (!$id || $data["id"]) {
-				$id = rand(111111, 999999);
+				$id = rand(1111111, 9999999);
 				$data = $this->get("id = " . $id, "id");
 			}
 			
