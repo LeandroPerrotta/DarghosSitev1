@@ -43,7 +43,7 @@
 		
 		function query($query) {
 			echo '<p>' . $query . '</p>'; // DEBUG ONLY
-			return mysql_query($query, $this->link);
+			return mysql_query($query, self::$link);
 		}
 	}
 ?>

@@ -1,4 +1,6 @@
 <?php
+	$t = microtime(true);
+	
 	set_time_limit(0);
 	
 	setlocale(LC_ALL, "pt_BR");
@@ -9,15 +11,23 @@
 	include_once("config.php");
 	include_once("classes/mysql.php");
 	include_once("classes/core.php");
+	include_once("classes/string.php");
+	include_once("classes/lang.php");
+	
+	include_once("classes/account.php");
 	
 	$query = explode("/", $_GET["query"]);
 	
-	define("TOPIC", formatar($query[0]));
-	define("SUBTOPIC", formatar($query[1]));
-	define("EXTRA_A", formatar($query[2]));
-	define("EXTRA_B", formatar($query[3]));
+	define("TOPIC", $string->format($query[0]));
+	define("SUBTOPIC", $string->format($query[1]));
+	define("EXTRA_A", $string->format($query[2]));
+	define("EXTRA_B", $string->format($query[3]));
 	
 	switch (TOPIC) {
+		case $lang->get(1):
+			$module = "modules/account/index.php";
+		break;
+		
 		default:
 			$module = "modules/index.php";
 		break;
@@ -54,5 +64,6 @@
 				<?php include_once($module); ?>
 			</div>
 		</div>
+		<p><?php echo microtime(true) - $t; ?></p>
 	</body>
 </html>

@@ -49,7 +49,7 @@
 			return $mysql->query("DELETE FROM players WHERE id = " . $id);
 		}
 		
-		function get($criteria, $fields = "*", $loop = false, $order = "name ASC") {
+		function get($criteria, $fields = "*", $loop = false, $order = null) {
 			return $mysql->consult("SELECT " . $fields . " FROM players " . ($criteria ? "WHERE " . $criteria : null) . " " . ($order ? "ORDER BY " . $order : null), $loop);
 		}
 	}

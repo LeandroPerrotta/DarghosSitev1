@@ -1,5 +1,5 @@
 <?php
-	class Core extends Mysql {
+	class Core {
 		function mail($message, $subject, $to, $from = CONFIG_SITEEMAIL) {
 			if (mail($to, $subject, $message, "From: " . $from)) {
 				return true;

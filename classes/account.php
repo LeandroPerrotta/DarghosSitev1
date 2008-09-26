@@ -1,15 +1,24 @@
 <?php
-	class Account {
+	class Account extends Mysql {
 		function create($email, $password) {
-			return $mysql->query("INSERT INTO accounts VALUES (null, '" . $password . "', '" . $email . "', 0, 0, 0, '" . $this->key() . "')");
+			while (!$id || $data["id"]) {
+				$id = rand(111111, 999999);
+				$data = $this->get("id = " . $id, "id");
+			}
+			
+			if ($this->query("INSERT INTO accounts VALUES (" . $id . ", '" . $password . "', '" . $email . "', 0, 0, 0, '" . $this->key() . "')")) {
+				return $id;
+			}
+			
+			return false;
 		}
 		
 		function delete($id) {
-			return $mysql->query("UPDATE accounts SET deleted = 1 WHERE id = " . $id);
+			return $this->query("UPDATE accounts SET deleted = 1 WHERE id = " . $id);
 		}
 		
-		function get($criteria, $fields = "*", $loop = false, $order = "email ASC") {
-			return $mysql->consult("SELECT " . $fields . " FROM accounts " . ($criteria ? "WHERE " . $criteria : null) . " " . ($order ? "ORDER BY " . $order : null), $loop);
+		function get($criteria, $fields = "*", $loop = false, $order = null) {
+			return $this->consult("SELECT " . $fields . " FROM accounts " . ($criteria ? "WHERE " . $criteria : null) . " " . ($order ? "ORDER BY " . $order : null), $loop);
 		}
 		
 		function key() {
@@ -23,7 +32,7 @@
 		}
 		
 		function update($id, $email, $password) {
-			return $mysql->query("UPDATE accounts SET password = '" . $password . "', email = '" . $email . "' WHERE id = " . $id);
+			return $this->query("UPDATE accounts SET password = '" . $password . "', email = '" . $email . "' WHERE id = " . $id);
 		}
 	}
 	

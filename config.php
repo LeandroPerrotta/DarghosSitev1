@@ -1,7 +1,8 @@
 <?php
-	define("CONFIG_SITEADDRESS", "http://darghos.com");
-	define("CONFIG_SITEEMAIL", "contact@darghos.com");
-	define("CONFIG_SITENAME", "Darghos");
+	define("CONFIG_SITEADDRESS", "http://magnus.com/");
+	define("CONFIG_SITEEMAIL", "contact@magnus.com");
+	define("CONFIG_SITENAME", "Magnus");
+	define("CONFIG_SITEOWNER", "Magnus Team");
 	
 	define("CONFIG_PLAYERSTARTLOOKBODY", 0);
 	define("CONFIG_PLAYERSTARTLOOKFEET", 0);
@@ -44,7 +45,7 @@
 	define("CONFIG_PLAYERROOKSTARTSOUL", 100);
 	define("CONFIG_PLAYERROOKSTARTTOWNID", 1);
 	
-	define("MYSQL_DB", "darghos");
+	define("MYSQL_DB", "magnus");
 	define("MYSQL_HOST", "localhost");
 	define("MYSQL_PASS", "");
 	define("MYSQL_USER", "root");
