@@ -1,7 +1,20 @@
 <?php
+	if (!$_SESSION) {
+		include_once("login.php");
+		return true;
+	}
+	
 	switch (SUBTOPIC) {
 		case $lang->get(2):
 			include_once("create.php");
+		break;
+		
+		case $lang->get(30):
+			include_once("login.php");
+		break;
+		
+		case $lang->get(31):
+			include_once("logout.php");
 		break;
 		
 		case $lang->get(22):

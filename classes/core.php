@@ -1,15 +1,13 @@
 <?php
 	class Core {
 		function mail($message, $subject, $to, $from = CONFIG_SITEEMAIL) {
-			// TODO: move configs to config.php
-			
 			$mail = new PHPMailer();
 			
-			$mail->Host = "smtp.darghos.com";
+			$mail->Host = SMTP_HOST;
 			$mail->IsSMTP();
-			$mail->Password = "***REMOVED***";
+			$mail->Password = SMTP_PASS;
 			$mail->SMTPAuth = true;
-			$mail->Username = "auto-responder@darghos.com";
+			$mail->Username = SMTP_USER;
 			
 			$mail->AddAddress($to);
 			$mail->AddReplyTo($from, CONFIG_SITENAME);
@@ -21,8 +19,6 @@
 			
 			if ($mail->Send()) {
 				return true;
-			} else {
-				echo $mail->ErrorInfo;
 			}
 			
 			return false;

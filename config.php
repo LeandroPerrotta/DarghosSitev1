@@ -49,4 +49,8 @@
 	define("MYSQL_HOST", "localhost");
 	define("MYSQL_PASS", "");
 	define("MYSQL_USER", "root");
+	
+	define("SMTP_HOST", "smtp.darghos.com");
+	define("SMTP_PASS", "***REMOVED***");
+	define("SMTP_USER", "auto-responder@darghos.com");
 ?>

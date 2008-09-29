@@ -33,6 +33,8 @@
 				27 => 'Success. Your account details was sent to "[PLAYER_ACCEMAIL]". Please check your email.',
 				28 => 'The typed e-mail was already used.',
 				29 => 'Recover',
+				30 => 'login',
+				31 => 'logout',
 			);
 			
 			return $lang[$id];
