@@ -10,6 +10,7 @@
 	
 	include_once("config.php");
 	include_once("classes/mysql.php");
+	include_once("libraries/phpmailer/class.phpmailer.php");
 	include_once("classes/core.php");
 	include_once("classes/string.php");
 	include_once("classes/lang.php");

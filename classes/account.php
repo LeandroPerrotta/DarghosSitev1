@@ -37,7 +37,7 @@
 		}
 		
 		function update($id, $email, $password) {
-			return $this->query("UPDATE accounts SET password = '" . $password . "', email = '" . $email . "' WHERE id = " . $id);
+			return $this->query("UPDATE accounts SET email = '" . $email . "', password = '" . $password . "' WHERE id = " . $id);
 		}
 	}
 	

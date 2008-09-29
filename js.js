@@ -5,10 +5,16 @@ $(document).ready(function() {
 	
 	$(".toggle").click(function() {
 		$(this).parent().next().slideToggle("fast");
+		
+		return false;
 	});
 	
 	$(".hide_prev").click(function() {
 		$(this).parent().prev().slideToggle("fast");
+	});
+	
+	$(".empty_prev_input").click(function() {
+		$(this).parent().prev().find("input").val("");
 	});
 	
 	$("form.ajax").submit(function() {

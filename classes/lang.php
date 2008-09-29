@@ -1,6 +1,8 @@
 <?php
 	class Lang {
 		function get($id) {
+			// ' = html, " = email
+			
 			$lang = array(
 				1 => 'account',
 				2 => 'create',
@@ -16,17 +18,21 @@
 				12 => 'To create an account you should agree to Privacy Policy Terms.',
 				13 => 'Your password should have at least 6 characters.',
 				14 => 'Your account data',
-				15 => "Hello player of " . CONFIG_SITENAME . ",\nYour account has been successfully created!\n\nBelow follows the details of your account:\nYour account number is: [PLAYER_ACCNUMBER]\nYour password is: [PLAYER_ACCPASSWORD]\nYou key is: [PLAYER_ACCKEY]\n\nThe account key is used to change your account e-mail instantly, so take care of that information.\n\nTo create your character and start the game visit:\n" . CONFIG_SITEADDRESS . "account\n\nSee you in World of " . CONFIG_SITENAME . "!\n" . CONFIG_SITEOWNER,
+				15 => "Hello player of " . CONFIG_SITENAME . ",\nYour account has been successfully created!\n\nBelow follows the details of your account:\nYour account number is: [PLAYER_ACCNUMBER]\nYour account password is: [PLAYER_ACCPASSWORD]\nYour account key is: [PLAYER_ACCKEY]\n\nThe account key is used to change your account e-mail instantly, so take care of that information.\n\nTo create your character and start the game visit:\n" . CONFIG_SITEADDRESS . "account\n\nSee you in World of " . CONFIG_SITENAME . "!\nYour " . CONFIG_SITEOWNER,
 				16 => 'Internal error. Please try again.',
 				17 => 'Account successfully created. Please check your e-mail.',
 				18 => 'Account Recover',
 				19 => 'Account e-mail:',
 				20 => 'I do not remember my account e-mail.',
 				21 => 'Account key:',
-				22 => "recover",
-				23 => "New account email:",
+				22 => 'recover',
+				23 => 'New account email:',
 				24 => 'The typed key is not valid.',
 				25 => 'The typed email do not exists.',
+				26 => "Hello player of " . CONFIG_SITENAME . ".\n\nAs requested, below follows the details of your account:\nYour account number is: [PLAYER_ACCNUMBER]\nYour account password is: [PLAYER_ACCPASSWORD]\n\nTo manage your account visit:\n" . CONFIG_SITEADDRESS . "account\n\nSee you in World of " . CONFIG_SITENAME . "!\nYour " . CONFIG_SITEOWNER,
+				27 => 'Success. Your account details was sent to "[PLAYER_ACCEMAIL]". Please check your email.',
+				28 => 'The typed e-mail was already used.',
+				29 => 'Recover',
 			);
 			
 			return $lang[$id];

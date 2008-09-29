@@ -6,31 +6,37 @@
 			$$key = $string->format($value);
 		}
 		
+		if ($account_key || $account_newemail) {
+			$account_email = null;
+		}
+		
 		if (!$account_email && (!$account_key || !$account_newemail)) {
 			$error[] = $lang->get(8);
 		}
 		
-		if (($account_email && !$string->validate($account_email)) || ($account_newemail && !$string->validate($account_newemail))) {
+		if (($account_email && !$string->validate($account_email, "email")) || ($account_newemail && !$string->validate($account_newemail, "email"))) {
 			$error[] = $lang->get(9);
 		}
 		
 		if (!$error) {
 			if ($account_key) {
-				$data = $account->get("key = '" . $account_key . "'", "id, key, password");
-				
-				if (!$data) {
-					$error[] = $lang->get(25);
-				}
-			} else if ($account_email) {
-				$data = $account->get("email = '" . $account_email . "'", "id, password");
+				$data = $account->get("`key` = '" . $account_key . "'", "id, password");
 				
 				if (!$data) {
 					$error[] = $lang->get(24);
 				}
+			} else {
+				$data = $account->get("email = '" . $account_email . "'", "id, password");
+				
+				if (!$data) {
+					$error[] = $lang->get(25);
+				}
 			}
 		}
 		
-		// TODO...
+		if (!$error && !$core->mail(str_replace(array("[PLAYER_ACCNUMBER]", "[PLAYER_ACCPASSWORD]"), array($data["id"], $data["password"]), $lang->get(26)), CONFIG_SITENAME . " - " . $lang->get(14), ($account_key ? $account_newemail : $account_email))) {
+			$error[] = $lang->get(16);
+		}
 		
 		if ($error) {
 			echo '<ul class="error">';
@@ -41,25 +47,33 @@
 			
 			echo '</ul>';
 		} else {
-			$account->create($account_id, $account_email, $account_password);
+			if ($account_key) {
+				$account->update($data["id"], $account_newemail, $data["password"]);
+			}
 			
 			echo '<ul class="success">';
 			
-			echo '<li>' . $lang->get(17) . '</li>';
+			echo '<li>' . str_replace("[PLAYER_ACCEMAIL]", ($account_key ? $account_newemail : $account_email), $lang->get(27)) . '</li>';
 			
 			echo '</ul>';
+		}
+		
+		if ($ajax) {
+			exit();
 		}
 	}
 ?>
 
-<form action="#" method="post">
+<form action="<?php echo $core->url(array(TOPIC, SUBTOPIC)); ?>" class="ajax" method="post">
 	<fieldset>
+		<div id="status"></div>
+		
 		<p>
 			<label for="account_email"><?php echo $lang->get(19); ?></label><br />
 			<input id="account_email" name="account_email" size="40" type="text" value="<?php echo $account_email; ?>" />
 		</p>
 		
-		<p><a class="toggle hide_prev" href="#"><?php echo $lang->get(20); ?></a></p>
+		<p><a class="toggle hide_prev empty_prev_input" href="#"><?php echo $lang->get(20); ?></a></p>
 		
 		<div>
 			<p>
@@ -74,7 +88,7 @@
 		</div>
 		
 		<p>
-			<input type="submit" value="<?php echo $lang->get(7); ?>" />
+			<input type="submit" value="<?php echo $lang->get(29); ?>" />
 		</p>
 	</fieldset>
 </form>

@@ -1,8 +1,28 @@
 <?php
 	class Core {
 		function mail($message, $subject, $to, $from = CONFIG_SITEEMAIL) {
-			if (mail($to, $subject, $message, "From: " . $from)) {
+			// TODO: move configs to config.php
+			
+			$mail = new PHPMailer();
+			
+			$mail->Host = "smtp.darghos.com";
+			$mail->IsSMTP();
+			$mail->Password = "***REMOVED***";
+			$mail->SMTPAuth = true;
+			$mail->Username = "auto-responder@darghos.com";
+			
+			$mail->AddAddress($to);
+			$mail->AddReplyTo($from, CONFIG_SITENAME);
+			$mail->From = $from;
+			$mail->FromName = CONFIG_SITENAME;
+			
+			$mail->Body = $message;
+			$mail->Subject = $subject;
+			
+			if ($mail->Send()) {
 				return true;
+			} else {
+				echo $mail->ErrorInfo;
 			}
 			
 			return false;
