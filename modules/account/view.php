@@ -1,89 +1,33 @@
-<h2><?php echo (!$ajax) ? $lang->get(4) : null; ?></h2>
+<h2><?php echo (!$ajax) ? $lang->get(40) : null; ?></h2>
 
 <?php
-	if ($_POST) {
-		foreach ($_POST as $key => $value) {
-			$$key = $string->format($value);
-		}
-		
-		if (!$account_email || !$account_password) {
-			$error[] = $lang->get(8);
-		}
-		
-		if ($account_email && !$string->validate($account_email, "email")) {
-			$error[] = $lang->get(9);
-		}
-		
-		if ($account_password && strlen($account_password) < 6) {
-			$error[] = $lang->get(13);
-		}
-		
-		if (!$account_privacypolicy) {
-			$error[] = $lang->get(12);
-		}
-		
-		if (!$error) {
-			$data = $account->get("email = '" . $account_email . "'", "email");
-			
-			if ($data) {
-				$error[] = $lang->get(28);
-			} else {
-				$account_id = $account->id();
-				$account_key = $account->key();
-				
-				if (!$core->mail(str_replace(array("[PLAYER_ACCKEY]", "[PLAYER_ACCNUMBER]", "[PLAYER_ACCPASSWORD]"), array($account_key, $account_id, $account_password), $lang->get(15)), CONFIG_SITENAME . " - " . $lang->get(14), $account_email)) {
-					$error[] = $lang->get(16);
-				}
-			}
-		}
-		
-		if ($error) {
-			echo '<ul class="error">';
-			
-			foreach ($error as $value) {
-				echo '<li>' . $value . '</li>';
-			}
-			
-			echo '</ul>';
-		} else {
-			$account->create($account_id, $account_email, $account_key, $account_password);
-			
-			echo '<ul class="success">';
-			
-			echo '<li>' . $lang->get(17) . '</li>';
-			
-			echo '</ul>';
-		}
-		
-		if ($ajax) {
-			exit();
-		}
+	echo '<h3>' . $lang->get(41) . '</h3>';
+	
+	$data = $account->get("id = " . $_SESSION["id"], "created, email");
+	
+	// TODO: account change email and password
+	
+	echo '
+		<ul>
+			<li><strong>' . $lang->get(42) . '</strong> ' . $string->format($data["created"], "date") . '</li>
+			<li><strong>' . $lang->get(43) . '</strong> ' . $data["email"] . '</li>
+			<li><strong>' . $lang->get(44) . '</strong> ' . $lang->get(45) . ' | ' . $lang->get(46) . ' | <a href="' . $core->url(array(TOPIC, $lang->get(31))) . '">' . $lang->get(51) . '</a></li>
+		</ul>
+	';
+	
+	echo '<h3>' . $lang->get(47) . '</h3>';
+	
+	$data = $character->get("account_id = " . $_SESSION["id"], "id, name", true, "name ASC");
+	
+	// TODO: character edit and delete
+	
+	echo '<ul>';
+	
+	foreach ($data as $d) {
+		echo '<li><strong>' . $d["name"] . '</strong> - ' . $lang->get(48) . ' | ' . $lang->get(49) . '</li>';
 	}
+	
+	echo '</ul>';
+	
+	echo '<p><a href="' . $core->url(array($lang->get(52), $lang->get(2))) . '">' . $lang->get(50) . '</a></p>';
 ?>
-
-<form action="<?php echo $core->url(array(TOPIC, SUBTOPIC)); ?>" class="ajax" method="post">
-	<fieldset>
-		<div id="status"></div>
-		
-		<p>
-			<label for="account_email"><?php echo $lang->get(5); ?></label><br />
-			<input id="account_email" name="account_email" size="40" type="text" value="<?php echo $account_email; ?>" />
-		</p>
-		
-		<p>
-			<label for="account_password"><?php echo $lang->get(6); ?></label><br />
-			<input id="account_password" name="account_password" size="40" type="password" value="<?php echo $account_password; ?>" />
-		</p>
-		
-		<div id="privacy_policy"><?php echo $lang->get(10); ?></div>
-		
-		<p>
-			<input <?php echo $account_privacypolicy ? 'checked="checked"' : null; ?> name="account_privacypolicy" id="account_privacypolicy" type="checkbox" value="1" /> 
-			<label for="account_privacypolicy"><?php echo $lang->get(11); ?></label>
-		</p>
-		
-		<p>
-			<input type="submit" value="<?php echo $lang->get(7); ?>" />
-		</p>
-	</fieldset>
-</form>

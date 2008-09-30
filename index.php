@@ -16,6 +16,7 @@
 	include_once("classes/lang.php");
 	
 	include_once("classes/account.php");
+	include_once("classes/character.php");
 	
 	$query = explode("/", $_GET["query"]);
 	
@@ -26,7 +27,19 @@
 	
 	switch (TOPIC) {
 		case $lang->get(1):
-			$module = "modules/account/index.php";
+			if (!$_SESSION) {
+				$module = "modules/account/login.php";
+			} else {
+				$module = "modules/account/index.php";
+			}
+		break;
+		
+		case $lang->get(52):
+			if (!$_SESSION) {
+				$module = "modules/account/login.php";
+			} else {
+				$module = "modules/character/index.php";
+			}
 		break;
 		
 		default:

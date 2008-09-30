@@ -1,9 +1,4 @@
 <?php
-	if (!$_SESSION) {
-		include_once("login.php");
-		return true;
-	}
-	
 	switch (SUBTOPIC) {
 		case $lang->get(2):
 			include_once("create.php");

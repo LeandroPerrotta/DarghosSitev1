@@ -24,6 +24,18 @@
 			return false;
 		}
 		
+		function redirect($url, $delay = false) {
+			$url = $this->url($url);
+			
+			echo '
+				<script type="text/javascript">
+					$(document).ready(function() {
+						setTimeout(function() { window.location = "' . $url . '"; }, ' . $delay . ');
+					});
+				</script>
+			';
+		}
+		
 		function url($attr = array()) {
 			foreach ($attr as $value) {
 				$url .= $value . "/";

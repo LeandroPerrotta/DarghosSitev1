@@ -20,14 +20,8 @@
 		
 		function validate($string, $type = null) {
 			switch ($type) {
-				case "email":
-					if (filter_var($string, FILTER_VALIDATE_EMAIL)) {
-						return true;
-					}
-				break;
-				
 				default:
-					if ($_SESSION) {
+					if (filter_var($string, FILTER_VALIDATE_EMAIL)) {
 						return true;
 					}
 				break;
