@@ -1,56 +1,59 @@
 <?php
-	define("CONFIG_SITEADDRESS", "http://localhost:81/magnus/");
-	define("CONFIG_SITEEMAIL", "contact@magnus.com");
-	define("CONFIG_SITENAME", "Magnus");
-	define("CONFIG_SITEOWNER", "Magnus Team");
-	
-	define("CONFIG_CHARACTERSTARTLOOKBODY", 0);
-	define("CONFIG_CHARACTERSTARTLOOKFEET", 0);
-	define("CONFIG_CHARACTERSTARTLOOKHEAD", 0);
-	define("CONFIG_CHARACTERSTARTLOOKLEGS", 0);
-	define("CONFIG_CHARACTERSTARTLOOKTYPECM", 75);
-	define("CONFIG_CHARACTERSTARTLOOKTYPEFEMALE", 136);
-	define("CONFIG_CHARACTERSTARTLOOKTYPEGOD", 266);
-	define("CONFIG_CHARACTERSTARTLOOKTYPEMALE", 128);
-	
-	define("CONFIG_CHARACTERSTARTCAP", 400);
-	define("CONFIG_CHARACTERSTARTEXP", 0);
-	define("CONFIG_CHARACTERSTARTHEALTH", 150);
-	define("CONFIG_CHARACTERSTARTLEVEL", 1);
-	define("CONFIG_CHARACTERSTARTLOSSEXP", 2);
-	define("CONFIG_CHARACTERSTARTLOSSITEMS", 2);
-	define("CONFIG_CHARACTERSTARTLOSSMANA", 2);
-	define("CONFIG_CHARACTERSTARTLOSSKILLS", 2);
-	define("CONFIG_CHARACTERSTARTMANA", 0);
-	define("CONFIG_CHARACTERSTARTMAGICLEVEL", 0);
-	define("CONFIG_CHARACTERSTARTPOSX", 432);
-	define("CONFIG_CHARACTERSTARTPOSY", 480);
-	define("CONFIG_CHARACTERSTARTPOSZ", 7);
-	define("CONFIG_CHARACTERSTARTSOUL", 100);
-	define("CONFIG_CHARACTERSTARTTOWNID", 1);
-	
-	define("CONFIG_CHARACTERROOKSTARTCAP", 400);
-	define("CONFIG_CHARACTERROOKSTARTEXP", 0);
-	define("CONFIG_CHARACTERROOKSTARTHEALTH", 150);
-	define("CONFIG_CHARACTERROOKSTARTLEVEL", 1);
-	define("CONFIG_CHARACTERROOKSTARTLOSSEXP", 2);
-	define("CONFIG_CHARACTERROOKSTARTLOSSITEMS", 2);
-	define("CONFIG_CHARACTERROOKSTARTLOSSMANA", 2);
-	define("CONFIG_CHARACTERROOKSTARTLOSSKILLS", 2);
-	define("CONFIG_CHARACTERROOKSTARTMANA", 0);
-	define("CONFIG_CHARACTERROOKSTARTMAGICLEVEL", 0);
-	define("CONFIG_CHARACTERROOKSTARTPOSX", 432);
-	define("CONFIG_CHARACTERROOKSTARTPOSY", 480);
-	define("CONFIG_CHARACTERROOKSTARTPOSZ", 7);
-	define("CONFIG_CHARACTERROOKSTARTSOUL", 100);
-	define("CONFIG_CHARACTERROOKSTARTTOWNID", 1);
-	
-	define("MYSQL_DB", "magnus");
-	define("MYSQL_HOST", "localhost");
-	define("MYSQL_PASS", "");
-	define("MYSQL_USER", "root");
-	
-	define("SMTP_HOST", "smtp.darghos.com");
-	define("SMTP_PASS", "***REMOVED***");
-	define("SMTP_USER", "auto-responder@darghos.com");
+session_start();
+////////////////////////////////////////////////////////////////////////////
+//                 Ultrax Server Site (SQL) 7.8 ou 7.8.1                  //
+//                           by Nostradamus                               //
+//                                1.1                                     //
+////////////////////////////////////////////////////////////////////////////
+
+//Configurações do OTServ
+include('classes/OTS.php');
+
+$cfg['dirdata'] = 'C:/server/data/';
+$cfg['house_file'] = 'world/test-house.xml';
+
+$maxsize = (512*10000); //Maxsize for guild images.
+$guildimgdir = "images/"; //guild img dir
+$screendir = "screenshots/"; //guild img dir
+$imagedir = "images/"; //images
+
+//Buttons
+////////////////////////////////////////////////
+$vote_button = ''.$imagedir.'vote.gif';
+$back_button = ''.$imagedir.'back.gif';
+$changeSex_button = ''.$imagedir.'changesex.gif';
+////////////////////////////////////////////////
+
+//Conectores SQL
+////////////////////////////////////////////////
+
+$db['user'] = "root";
+$db['pass'] = "";
+$db['host'] = "localhost";
+$db['name'] = "otserv";
+@mysql_connect($db['host'], $db['user'], $db['pass']) or die("Não foi possivel se conectar com o banco de dados.");
+@mysql_select_db($db['name']) or die("Não foi possivel selecionar a tabela de dados: <b>".$db['name']."</b>.");
+
+// database configuration - can be simply moved to external file, eg. config.php
+$userdb = array(
+    'host' => 'localhost',
+    'user' => 'root',
+    'port' => '3306',
+    'database' => 'otserv',
+	'password' => ''
+);
+/////////////////////////////////////////////////
+
+if($_SESSION['lang'] == "")
+{
+	include('lang/pt-br/global.php');
+}	
+else
+{
+	if($_SESSION['lang'] == 'pt_br')
+		include('lang/pt-br/global.php');
+	else
+		include('lang/en-us/global.php');
+}
+
 ?>
