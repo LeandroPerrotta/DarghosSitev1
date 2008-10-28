@@ -1,0 +1,242 @@
+--------------------------------------
+--      Revisão: 24-10-2008			--
+-- 									--
+-- 		DARGHOS WEBSITE 			-- 
+-- 		CLASSES E FUNÇÕES 			--
+--------------------------------------
+--------------------------------------
+
+SUMARIO:
+>> = entrada da função
+<< = valor retornado	
+* = argumento não obrigatorio (possui valor padrão)
+
+ENGINE
+[
+	DESCRIÇÃO
+	[
+		Classe primaria de funcionamento do website e funções ainda sem classe definida.
+	]
+
+	USO
+	[
+		$engine->função(argumentos)
+	]
+
+	FUNÇÕES
+	[
+		>>	loadClass(nome_da_classe)
+		<<	instancia do objeto
+		//	CHAMA E INICIA OUTRAS CLASSES //
+		
+		>>	loggedIn()
+		<<	booleano
+		//	VALIDA A SESSION DE LOGIN E RETORNA TRUE SE ESTIVER LOGADO//
+		
+		>>	filtreString(string)
+		<<	booleano
+		//	VALIDA UMA STRING E RETORNA TRUE SE NÃO OUVER INDICIOS MALICIOSOS //	
+		
+		>>	encrypt(string)
+		<<	string
+		//	RETORNA A HASHE DE ENCRIPTAÇÃO DE UMA STRING BASEADO COM A CONSTANTE "ENCRYPT_TYPE" NO CONFIG.PHP //		
+		
+		>>	random_key(tamanho, separadores, *tipo)
+		<<	string
+		//	RETORNA UMA CHAVE EM FORMA DE SERIAL BASEADO NOS CONSTRUTORES "TAMANHO" (QUANTIDADE DE CARACTERES POR SEPARADOR), "SEPARADORES" (QUANTIDADE DE ELEMENTOS SEPARADOS POR UM TRAÇO - ), "TIPO" (OS TIPOS PODEM SER NUMEROS E LETRAS MINUSCULAS OU MAIUSCULAS SEPARADOS POR UM + [EX: "number+upper", "upper", "number+lower"]) //	
+
+		>>	isEmailFormat(string)
+		<<	booleano
+		//	VALIDA UMA STRING E RETORNA TRUE SE HOUVER INDICOS DE FORMATO DE EMAIL VALIDO //			
+		
+		>>	accountAccess()
+		<<	string
+		//	IDENTICA A FUNÇÃO "loggedIn()" ENTRETANTO RETORNA O GROUP_ID DA CONTA AO INVEZ DE TRUE //	
+
+		>>	sendEmail(destino, assunto, conteudo)
+		<<	booleano
+		//	ENVIA UM EMAIL USANDO A CLASS PHPMAILER, SE O EMAIL É ENVIADO COM SUCESSO RETORNA TRUE, SE NÃO FALSE //				
+
+		>>	isFromBlackList(string)
+		<<	booleano
+		//	VERIFICA SE EXISTE INDICIOS DE NOMES OU SINTAXES PROIBIDAS EM UMA STRING, RETORNA TRUE SE OUVER INDICIOS E FALSE SE NÃO OUVER //	
+		
+		>>	canUseName(string)
+		<<	booleano
+		//	VERIFICA SE UM NOME ESTÁ DENTRO DAS REGRAS DE FORMATAÇÃO DE NOMES, RETORNA TRUE FOR PERMITIDO USAR O NOME E FALSE SE NÃO PUDER //			
+	]	
+]	
+
+DATABASE
+[
+	DESCRIÇÃO
+	[
+		Classe de manuzeio de objetos mysql.
+	]
+	
+	USO
+	[
+		//inicialização
+		//OBS: Está classe já está auto-inicializada dentro das paginas, apénas é necessaria inicia-la no escopo de classes.
+		$DB = $engine->loadClass("Database")
+		
+		//uso de funções
+		$DB->função(argumentos)
+	]
+	
+	FUNÇÕES
+	[
+		>>	query(query, *link)
+		<<	null
+		//	EXECULTA E ARMAZENA A QUERY PARA OPERAÇÕES FUTURAS //
+		
+		>>	getInstance()
+		<<	instancia do objeto
+		//	INICIA E INSTANCIA O OBJETO DATABASE NO ESCOPO (PARA USAR A CLASSE DB DENTRO DE OUTRAS CLASSES) //
+		
+		>>	fetch()
+		<<	instancia do objeto fetch
+		//	INSTANCIA O OBJETO ARMAZENADO EM QUERY E O RETORNA, RETORNA FALSE SE NÃO A OPERAÇÃO NAO FOR FEITA COM SUCESSO //	
+		
+		>>	num_rows()
+		<<	null
+		//	RETORNA O NUMERO DE LINHAS DA ULTIMA QUERY, RETORNA FALSE SE NÃO A OPERAÇÃO NAO FOR FEITA COM SUCESSO //				
+	]		
+]
+
+ACCOUNTS
+[
+	DESCRIÇÃO
+	[
+		Classe de manuzeio de dados das contas.
+	]
+	
+	USO
+	[
+		//inicialização
+		$account = $engine->loadClass("Accounts")
+		
+		//uso de funções
+		$account->função(argumentos)
+	]
+	
+	FUNÇÕES
+	[
+		>>	loadByNumber(account_number, *db_fields)
+		<<	booleano
+		//	VALIDA E CARREGA UMA CONTA PELO NUMERO SE ESTE EXISTIR, RETORNA FALSE SE O NUMERO NÃO EXISTIR //
+		
+		>>	loadByEmail(email)
+		<<	booleano
+		//	VALIDA E CARREGA UMA CONTA PELO EMAIL SE ESTE EXISTIR, RETORNA FALSE SE O EMAIL NÃO EXISTIR //
+		
+		>>	getNumber(*rand)
+		<<	string
+		//	CARREGA UMA NOVA CONTA NA INSTANCIA E RETORNA O NUMERO DA NOVA CONTA, RETORNA FALSE SE NAO OUVER UM NUMERO DISPONIVEL //	
+		
+		>>	saveNumber()
+		<<	null
+		//	SALVA A NOVA CONTA NO BANCO DE DADOS //		
+		
+		>>	update(array(db_fields))
+		<<	null
+		//	SALVA DA INSTANCIA PARA O BANCO DE DADOS OS FIELDS ARGUMENTADOS //	
+
+		>>	loadEmailChanger()
+		<<	booleano
+		//	CARREGA NA INSTANCIA AS MUDANÇAS DE E-MAILS AGENDADAS DA CONTA, RETORNA FALSE SE NÃO HOUVER MUDANÇAS //			
+		
+		>>	loadQuestions()
+		<<	booleano
+		//	CARREGA NA INSTANCIA AS PERGNTAS E RESPOSTAS DA CONTA, RETORNA FALSE SE NÃO HOUVER PERGUNTAS E RESPOSTAS //				
+		
+		>>	loadChangePasswordKey()
+		<<	booleano
+		//	RETORNA A ULTIMA CHAVE DE VALIDAÇÃO DE MUDANÇA DE SENHA CRIADA PARA CONTA, RETORNA FALSE SE NÃO HOUVER NENHUMA CHAVE //		
+		
+		>>	addChangePasswordKey(chave)
+		<<	null
+		//	SALVA UMA NOVA CHAVE DE MUDANÇA DE SENHA PARA A CONTA //			
+		
+		>>	ereaseChangePasswordKeys()
+		<<	null
+		//	DELETA TODAS CHAVES DE MUDANÇAS DE SENHA PARA A CONTA //	
+
+		>>	ereaseQuestions()
+		<<	null
+		//	DELETA TODAS PERGUNTAS E RESPOSTAS DA CONTA //		
+		
+		>>	addQuestion(pergunta, resposta)
+		<<	null
+		//	SALVA UMA NOVA PERGUNTA E RESPOSTA PARA A CONTA //				
+		
+		>>	schedulerNewEmailIn(email, data)
+		<<	null
+		//	AGENDA UMA NOVA MUDANÇA DE EMAIL PARA X DIAS (dias em argumento data / unixtime) //			
+
+		>>	cancelChangeEmail()
+		<<	null
+		//	DELETA TODAS MUDANÇAS DE E-MAIL AGENDADAS PARA A CONTA //		
+
+		>>	setData(data, valor)
+		<<	null
+		//	ALTERA UM CAMPO DA CONTA NA INSTANCIA DA CONTA (necessita de update() para ser salvo no banco de dados) //		
+
+		>>	getData(data)
+		<<	string
+		//	RETORNA UM CAMPO DA CONTA INSTANCIADA  //
+		
+		>>	getEmailChangerData(data)
+		<<	null
+		//	RETORNA UM CAMPO DA MUDANÇA DE EMAIL DA CONTA INSTANCIADA  //		
+	]		
+]
+
+PLAYERS
+[
+	DESCRIÇÃO
+	[
+		Classe de manuzeio de dados dos personagens.
+		OBS: Está classe está em construção
+	]
+	
+	USO
+	[
+		//inicialização
+		$player = $engine->loadClass("Players")
+		
+		//uso de funções
+		$player->função(argumentos)
+	]
+	
+	FUNÇÕES
+	[
+		>>	loadByName(nome)
+		<<	booleano
+		//	VALIDA E CARREGA UM PERSONAGEM SE ESTE EXISTIR, RETORNA FALSE SE O JOGADOR NÃO EXISTIR //
+		
+		>>	getData(data)
+		<<	string
+		//	RETORNA UM CAMPO DO PERSONAGEM INSTANCIADO  //
+		
+		>>	setData(data, valor)
+		<<	null
+		//	ALTERA UM CAMPO NA INSTANCIA DO PERSONAGEM (ainda não é possivel salvar as alterações no banco de dados, apénas inserir novos registros ao criar novos personagens
+		
+		>>	setLook(looktype*)
+		<<	null
+		//	SELECIONA UM ESTILO DE LOOK PARA O PERSONAGEM (não defina para usar default por padrão) //		
+		
+		>>	getPlayerId()
+		<<	inteiro
+		//	OBTEM A ID DO PLAYER CARREGADO PELO NOME //		
+
+		>>	saveNew()
+		<<	null
+		//	SALVA UM NOVO JOGADOR NO BANCO DE DADOS USANDO OS CAMPOS INSTANCIADOS //		
+
+		>>	addItem(slot, slot_playerId, item_id, count)
+		<<	null
+		//	ADICIONA UM ITEM AO INVENTARIO DO JOGADOR INSTANCIADO //					
+	]		
+]
