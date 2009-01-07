@@ -4,21 +4,52 @@ if($engine->accountAccess() >= GROUP_GOD)
 	echo '<tr><td class=newbar><center><b>:: Deletar Player ::</td></tr>
 	<tr><td class=newtext><center><br>';
 	if ($_SERVER['REQUEST_METHOD'] == "POST")
-	{
-		include "tools/admin.php";
-		
-		if($_POST['type'] != 2)
+	{		
+		if($_POST['type'] == 0)
 		{
-			Deletion::player($_POST['player'],$_POST['type']);
+			$getPlayerQuery = mysql_query("SELECT id FROM players WHERE name = '".$_POST['player']."'") or die(mysql_error());
+			$getPlayerFetch = mysql_fetch_object($getPlayerQuery);
+			
+			mysql_query("DELETE FROM player_items WHERE player_id = '".$getPlayerFetch->id."'") or die(mysql_error());	
+			mysql_query("DELETE FROM player_depotitems WHERE player_id = '".$getPlayerFetch->id."'") or die(mysql_error());	
+			mysql_query("DELETE FROM player_skills WHERE player_id = '".$getPlayerFetch->id."'") or die(mysql_error());	
+			mysql_query("DELETE FROM player_deaths WHERE player_id = '".$getPlayerFetch->id."'") or die(mysql_error());	
+			mysql_query("DELETE FROM player_deletion WHERE player_id = '".$getPlayerFetch->id."'") or die(mysql_error());	
+			mysql_query("DELETE FROM player_storage WHERE player_id = '".$getPlayerFetch->id."'") or die(mysql_error());	
+			mysql_query("DELETE FROM player_tutors WHERE player_id = '".$getPlayerFetch->id."'") or die(mysql_error());	
+			mysql_query("DELETE FROM player_viplist WHERE player_id = '".$getPlayerFetch->id."'") or die(mysql_error());	
+			
+			mysql_query("DELETE FROM player WHERE id = '".$getPlayerFetch->id."'");	
+					
 			$stat = 'Player deletado!';
 			$msg = 'Player '.$_POST['player'].' (e ou) account deletado.';	
 		}	
-		else
+		elseif($_POST['type'] == 1)
 		{
-			Deletion::resetServer($_POST['player']);
-			$stat = 'Servidor resetado!';
-			$msg = 'O Servidor ID '.$_POST['player'].' foi resetado.';	
-		}	
+			$getAccQuery = mysql_query("SELECT account_id FROM players WHERE name = '".$_POST['player']."'") or die(mysql_error());
+			$getAccFetch = mysql_fetch_object($getAccQuery);
+				
+			$getPlayersQuery = mysql_query("SELECT id, name FROM players WHERE account_id = '".$getAccFetch->account_id."'") or die(mysql_error());
+			
+			while($getPlayersFetch = mysql_fetch_object($getPlayersQuery))
+			{
+				mysql_query("DELETE FROM player_items WHERE player_id = '".$getPlayersFetch->id."'") or die(mysql_error());	
+				mysql_query("DELETE FROM player_depotitems WHERE player_id = '".$getPlayersFetch->id."'") or die(mysql_error());	
+				mysql_query("DELETE FROM player_skills WHERE player_id = '".$getPlayersFetch->id."'") or die(mysql_error());	
+				mysql_query("DELETE FROM player_deaths WHERE player_id = '".$getPlayersFetch->id."'") or die(mysql_error());	
+				mysql_query("DELETE FROM player_deletion WHERE player_id = '".$getPlayersFetch->id."'") or die(mysql_error());	
+				mysql_query("DELETE FROM player_storage WHERE player_id = '".$getPlayersFetch->id."'") or die(mysql_error());	
+				mysql_query("DELETE FROM player_tutors WHERE player_id = '".$getPlayersFetch->id."'") or die(mysql_error());	
+				mysql_query("DELETE FROM player_viplist WHERE player_id = '".$getPlayersFetch->id."'") or die(mysql_error());	
+				
+				mysql_query("DELETE FROM players WHERE id = '".$getPlayersFetch->id."'") or die(mysql_error());	
+			}
+				
+			mysql_query("DELETE FROM accounts WHERE id = '".$getAccFetch->account_id."'") or die(mysql_error());	
+			
+			$stat = 'Player deletado!';
+			$msg = 'Player '.$_POST['player'].' (e ou) account deletado.';	
+		}		
 					
 		echo '<center><table width="95%" bgcolor="black" BORDER="0" CELLSPACING="1" CELLPADDING="4">';
 		echo '<tr><td class=rank2>'.$stat.'</td></tr>';

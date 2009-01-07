@@ -31,9 +31,9 @@ class Accounts
 
 		$this->DB->query("SELECT `id` FROM `accounts`");
 		
-        foreach($this->DB->fetch() as $account)
+        while($account = $this->DB->fetch())
         {
-            $exist[] = $account['id'];
+            $exist[] = $account->id;
         }	
 		
         while(true)
@@ -204,7 +204,7 @@ class Accounts
 	
 	function loadChangePasswordKey()
 	{
-		$this->DB->query("SELECT `key` FROM site.account_changepasswordkeys WHERE account_id = '".$this->data['id']."'");
+		$this->DB->query("SELECT `key` FROM site.account_changepasswordkeys WHERE account_id = '".$this->data['id']."' ORDER by date DESC");
 		
 		if($this->DB->num_rows() != 0)
 		{

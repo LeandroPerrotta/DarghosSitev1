@@ -23,7 +23,7 @@ if($engine->accountAccess() >= GROUP_GOD)
 			$totalDays = $totalDays + $fetch->price;
 			
 			if($count <= 500)
-				echo '<tr class="rank1"><td><a href="?page=character.details&char='.$acc_fetch->name.'">'.$acc_fetch->name.'</a></td><td>'.date('d/m/Y',$fetch->date).'</td><td>'.$fetch->item_name.'</td><td>'.$fetch->price.'</td></tr>';
+				echo '<tr class="rank1"><td><a href="?page=character.details&char='.$acc_fetch->name.'">'.$acc_fetch->name.'</a>('.$fetch->account_id.')</td><td>'.date('d/m/Y',$fetch->date).'</td><td>'.$fetch->item_name.'</td><td>'.$fetch->price.'</td></tr>';
 		}
 		$totalDays = $totalDays * 0.5;
 		echo '<tr class="rank1"><td colspan="4">Renda média: R$ '.$totalDays.'</td></tr>';

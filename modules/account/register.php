@@ -53,7 +53,7 @@ Sua conta é: '.$number.'
 Sua senha é: '.$pass.'
 
 Para criar um personagem e começar a jogar visite:
-'.GLOBAL_URL.'/index.php?page=account.login
+http://ot.darghos.com/index.php?page=account.login
 
 Nos vemos no Darghos!
 UltraxSoft Team.';

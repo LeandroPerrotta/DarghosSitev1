@@ -6,7 +6,7 @@ $news= trim($_REQUEST['shownew']);
 
 if($news)
 {
-	$getNews = mysql_query("SELECT * FROM `news` WHERE (`ID` = '$news')");
+	$getNews = mysql_query("SELECT * FROM site.`news` WHERE (`ID` = '$news')");
 	$fetch_news = mysql_fetch_object($getNews);
 
 	if($fetch_news->ID < 255)
@@ -15,7 +15,7 @@ if($news)
 		$post = $fetch_news->post;
 	
 	echo '<TABLE CELLSPACING=0 CELLPADDING="4" BORDER=0 WIDTH=95% align=center>
-	<tr><td class=newtittle width="20%"><font size=1>'.date('d/m/Y',$fetch_news->post_data).'</font> - <b>'.$fetch_news->post_title.'</b></td></tr>
+	<tr><td class=newtittle width="20%"><font size=1>'.date('d/m/Y',$fetch_news->date).'</font> - <b>'.$fetch_news->title.'</b></td></tr>
 	<tr><td colspan=2><br><font size=2>'.$post.'</td></tr>
 	</table>';	
 	
@@ -25,10 +25,7 @@ if($news)
 }	
 else
 {
-	if(Account::isAdmin($account))
-		$getNews = mysql_query("SELECT * FROM `news` order by post_data desc");
-	else
-		$getNews = mysql_query("SELECT * FROM `news` WHERE new_status = 0 order by post_data desc");
+	$query = $db_mysql->query("SELECT * FROM news order by date desc");
 		
 	echo '<center><table border="0" width="95%" CELLSPACING="1" CELLPADDING="4">';
 	echo ''.obtainText("NEWSARCHIVE_DESC", $lang['lang']).'';
@@ -38,12 +35,12 @@ else
 	echo '<tr class=rank3><td><b>'.$lang['title'].'</td><td><b>'.$lang['date'].'</td></tr>';
 	
 	
-	while($fetch_news = mysql_fetch_array($getNews)	)
+	while($fetch_news = $query->fetch())
 	{
 		$t++;
 		$style = rotateStyle($t);			
 		
-		echo '<tr class='.$style.'><td><a href="?page=news.files&shownew='.$fetch_news['id'].'">'.$fetch_news['post_title'].'</a></td><td>'.date('d/m/Y',$fetch_news['post_data']).'</td></tr>';
+		echo '<tr class='.$style.'><td><a href="?page=news.files&shownew='.$fetch_news->id.'">'.$fetch_news->title.'</a></td><td>'.date('d/m/Y',$fetch_news->date).'</td></tr>';
 	}
 	echo '</table><br>';
 }

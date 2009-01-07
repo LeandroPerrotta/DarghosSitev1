@@ -133,6 +133,10 @@ switch($page["url"])
 	
 	case "contribute.beneficts";
 		$module = "modules/contribution/beneficts.php";
+	break;	
+
+	case "contribute.pagseguro";
+		$module = "modules/contribution/confirm.PagSeguro.php";
 	break;		
 	
 	//MODULO COMUNIDADE
@@ -205,7 +209,8 @@ switch($page["url"])
 	
 	case "darghopedia.npcs";
 		$module = "modules/darghopedia/npcs.php";
-	break;	
+	break;
+	
 
 	//MODULOS ADMINISTRAÇÂO
 

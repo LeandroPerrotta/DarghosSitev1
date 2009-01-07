@@ -1,7 +1,7 @@
 <?
 if($engine->loggedIn())
 {
-	if(Account::isPremium($account))
+	if(Account::isPremium($account) AND SHOW_ITEMSHOP == 1)
 	{	
 		echo '<tr><td class=newbar><center><b>:: Item Shop List ::</td></tr>
 		<tr><td class=newtext>';
@@ -159,8 +159,57 @@ if($engine->loggedIn())
 
 		echo '<tr class="rank3"><td><img src="images/items/nightmare1.gif" border="0"></td><td><input type="radio" name="item_shop" value="60"> First Nightmare Addon</td><td>Dando Use neste item você irá obter o primeiro addon do outfit Nightmare.</td><td>40</td></tr>';
 		echo '<tr class="rank3"><td><img src="images/items/nightmare2.gif" border="0"></td><td><input type="radio" name="item_shop" value="61"> Second Nightmare Addon</td><td>Dando Use neste item você irá obter o segundo addon do outfit Nightmare.</td><td>40</td></tr>';
+	
+		echo '<br><center><table width="95%" border="0" cellpadding="4" cellspacing="1">';
+		echo '<br><tr class="rank2"><td colspan="4"></b>Itens incrementadores de atributos e defesa.<font size=1><br>Para informações sobre os itens visite http://tibia.erig.net  <br>Lembre-se: Alguns itens desses requerem level para serem usados.</td></tr>';
+		echo '<br><tr class="rank2"><td colspan="4"><b>Armors(Update 8.31)</td></tr>';
+		echo '<tr class="rank1"><td width="3%"></td><td width="20%"><b>Item</td><td width="25%"><b>Descrição</td><td width="10%"><b>premDays</td></tr>';
+
 		
+		echo '<tr class="rank3"><td><img src="images/items/Spirit_Cloak.gif" border="0"></td><td><input type="radio" name="item_shop" value="63"> Spirit Cloak</td><td>Magic Level +1</td><td>10</td></tr>';
+		echo '<tr class="rank3"><td><img src="images/items/Focus_Cape.gif" border="0"></td><td><input type="radio" name="item_shop" value="64"> Focus Cape</td><td>Magic Level +1</td><td>10</td></tr>';
+		echo '<tr class="rank3"><td><img src="images/items/Lord_Cape.gif" border="0"></td><td><input type="radio" name="item_shop" value="65"> Dark Lord\'s Cape</td><td>Protection death +8%, holy -8%</td><td>12</td></tr>';
+		echo '<tr class="rank3"><td><img src="images/items/Robe_of_the_Underworld.gif" border="0"></td><td><input type="radio" name="item_shop" value="67"> Robe of the Underworld</td><td>Protection death +12%, holy -12%<td>12</td></tr>';
+		echo '<tr class="rank3"><td><img src="images/items/Paladin_Armor.gif" border="0"></td><td><input type="radio" name="item_shop" value="66">Paladin Armor</td><td>Distance Skills +2</td><td>20</td></tr>';
+		echo '<tr class="rank3"><td><img src="images/items/Dragon_Robe.gif" border="0"></td><td><input type="radio" name="item_shop" value="68"> Dragon Robe</td><td>Protection fire +12%, ice -12%</td><td>12</td></tr>';
+		echo '<tr class="rank3"><td><img src="images/items/Greenwood_Coat.gif" border="0"></td><td><input type="radio" name="item_shop" value="69"> Greenwood Coat</td><td>Protection earth +12%, fire -12%</td><td>12</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Frozen_Plate.gif" border="0"></td><td><input type="radio" name="item_shop" value="70"> Frozen Plate</td><td>Protection ice +7%, energy -7%</td><td>12</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Lavos_Armor.gif" border="0"></td><td><input type="radio" name="item_shop" value="71"> Lavos Armor</td><td>Protection fire +3%, ice -3%</td><td>12</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Crystalline_Armor.gif" border="0"></td><td><input type="radio" name="item_shop" value="71"> Crystalline Armor</td><td>Ice Protection +3%, Energy Protection -3%</td><td>12</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Voltage_Armor.gif" border="0"></td><td><input type="radio" name="item_shop" value="72">Voltage Armor</td><td>Protection energy +3%, earth -3%</td><td>12</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Skullcracker_Armor.gif" border="0"></td><td><input type="radio" name="item_shop" value="74">Skullcracker Armor</td><td>Protection death +5%, holy -5%</td><td>15</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Earthborn_Titan_Armor.gif" border="0"></td><td><input type="radio" name="item_shop" value="75">Earthborn Titan Armor</td><td>Protection earth +5%, fire -5%</td><td>15</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Windborn_Colossus_Armor.gif" border="0"></td><td><input type="radio" name="item_shop" value="76">Windborn Colossus Armor</td><td>Club fighting +2, protection energy +5%, earth -5%</td><td>20</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Oceanborn_Leviathan_Armor.gif" border="0"></td><td><input type="radio" name="item_shop" value="77">Oceanborn Leviathan Armor </td><td>Protection ice +5%, energy -5%</td><td>20</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Master_Archers_Armor.gif" border="0"></td><td><input type="radio" name="item_shop" value="78">Master Archer\'s Armor</td><td>Arm:15, Distance fighting +3</td><td>20</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Fireborn_Giant_Armor.gif" border="0"></td><td><input type="radio" name="item_shop" value="79">Fireborn Giant Armor</td><td>Arm:15, ,sword fighting +2, protection fire +5%, ice -5%</td><td>25</td></tr>';	
+
+
+		echo '<tr class="rank2"><td colspan="4"><b>Spellbooks(Update 8.31) (Sómente para Druids/Sorcerers)</td></tr>';
+
+		echo '<tr class="rank3"><td><img src="images/items/Spellbook_of_Mind_Control.gif" border="0"></td><td><input type="radio" name="item_shop" value="80">Spellbook of Mind Control</td><td>Def:16<br>Magic level +2 </td><td>20</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Spellbook_of_Enlightenment.gif" border="0"></td><td><input type="radio" name="item_shop" value="81">Spellbook of Enlightenment</td><td>Def:18<br> Magic level +1</td><td>15</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Spellbook_of_Dark_Mysteries.gif" border="0"></td><td><input type="radio" name="item_shop" value="82">Spellbook of Dark Mysteries</td><td>Def:16<br>Magic level +3</td><td>25</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Spellscroll_of_Prophecies.gif" border="0"></td><td><input type="radio" name="item_shop" value="83">Spellscroll of Prophecies</td><td>Def:12<br>Magic level +3</td><td>25</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Spellbook_of_Warding.gif" border="0"></td><td><input type="radio" name="item_shop" value="84">Spellbook of Warding</td><td>Def:22<br>Magic level +1</td><td>15</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Spellbook_of_Lost_Souls.gif" border="0"></td><td><input type="radio" name="item_shop" value="85">Spellbook of Lost Souls</td><td>Def:20<br>Magic level +2</td><td>15</td></tr>';	
+	
+		echo '<tr class="rank2"><td colspan="4"><b>Novos Weapons de Distancia (Sómente para Paladinos)</td></tr>';
+	
+		echo '<tr class="rank3"><td><img src="images/items/Modified_Crossbow.gif" border="0"></td><td><input type="radio" name="item_shop" value="86">Modified Crossbow</td><td>Range:5<br> Hit% +1</td><td>12</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Elethriel.gif" border="0"></td><td><input type="radio" name="item_shop" value="87">Elethriel\'s Elemental Bow </td><td>Range:4<br> Hit% +7</td><td>12</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Royal_Crossbow.gif" border="0"></td><td><input type="radio" name="item_shop" value="88">Royal Crossbow</td><td>Range:6, Atk +5, Hit% +3</td><td>20</td></tr>';	
+	
+		echo '<br><center><table width="95%" border="0" cellpadding="4" cellspacing="1">';
+		echo '<tr class="rank2"><td colspan="4"><b>Itenes Leves/ageis</td></tr>';
+		echo '<tr class="rank1"><td width="3%"></td><td width="20%"><b>Item</td><td width="25%"><b>Descrição</td><td width="10%"><b>premDays</td></tr>';
 		
+		echo '<tr class="rank3"><td><img src="images/items/Blue_Legs.gif" border="0"></td><td><input type="radio" name="item_shop" value="89"> Blue Legs</td><td>Item normal e leve.</td><td>15</td></tr>';	
+		echo '<tr class="rank3"><td><img src="images/items/Mammoth_Fur_Cape.gif" border="0"></td><td><input type="radio" name="item_shop" value="90"> Mammoth Fur Cape</td><td>Item normal e leve.</td><td>10</td></tr>';	
+				
+
+	
+	
 		echo '</table>';
 
 		echo '<br><center><table width="70%" border="0" cellpadding="4" cellspacing="1">';

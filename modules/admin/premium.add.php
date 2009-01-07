@@ -10,6 +10,7 @@ if($engine->accountAccess() >= GROUP_GOD)
 		$prem = $_POST['premdays'];
 		$premMode = $_POST['mode'];
 		$premType = $_POST['type'];
+		$auth = $_POST['auth'];
 
 		if(is_numeric($user))
 			$player_query = mysql_query("SELECT * FROM players WHERE account_id = '".$user."'");
@@ -29,7 +30,7 @@ if($engine->accountAccess() >= GROUP_GOD)
 			
 			if($premMode == 0)
 			{
-				mysql_query("INSERT INTO premium(account_id, premdays, date, premstatus) VALUES('$acc_id', '$prem', '$date', '0')") or die(mysql_error());			
+				mysql_query("INSERT INTO site.payments(account_id, period, activation, status, auth) VALUES('$acc_id', '$prem', '$date', '0', '$auth')") or die(mysql_error());			
 			}
 			elseif($premMode == 1)
 			{
@@ -75,6 +76,7 @@ if($engine->accountAccess() >= GROUP_GOD)
 		<br><center><table width="95%" bgcolor="black" BORDER="0" CELLSPACING="1" CELLPADDING="4">	
 		<tr><td width="25%" class=rank1>Conta ou Nome:</td><td width="75%" class=rank1><input class=login type="text" name="user" size="20"></td></tr>
 		<tr><td width="25%" class=rank1>Dias:</td><td width="75%" class=rank1><input class=login type="text" name="premdays" size="20"></td></tr>	
+		<tr><td width="25%" class=rank1>Auth:</td><td width="75%" class=rank1><input class=login type="text" name="auth" size="20"></td></tr>	
 		<tr><td width="25%" class=rank1>Modo:</td><td width="75%" class=rank1><select class=login name="mode"><option value="0">Ativamento</option><option value="1">Revisão</option><option value="2">Gratis</option></select></td></tr>	
 		</table>
 		

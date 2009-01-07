@@ -1,6 +1,6 @@
 <?php
 //Configurações do OTServ
-$cfg['dirdata'] = 'C:/Darghos/Old8.11/data/';
+$cfg['dirdata'] = 'C:/Server/data/';
 $cfg['house_file'] = 'world/test-house.xml';
 
 $maxsize = (512*10000); //Maxsize for guild images.
@@ -20,12 +20,16 @@ $changeSex_button = ''.$imagedir.'changesex.gif';
 
 //Conectores SQL
 ////////////////////////////////////////////////
+include "classes/mysql.php";
+$db_mysql = new MySQL();
+$db_mysql->connect("10.25.29.210:3309", "wbst", "Va6R4fRe", "site");
+
 $userdb = array(
-    'host' => 'localhost',
+    'host' => 'localhost:3309',
     'user' => 'root',
-    'port' => '3306',
+    'port' => '3309',
     'database' => 'newot',
-	'password' => ''
+	'password' => 't83oroub'
 );
 
 if(!@mysql_connect($userdb['host'], $userdb['user'], $userdb['password']))
@@ -56,8 +60,11 @@ define('GROUP_GAMEMASTER', 4);
 define('GROUP_COMMUNITYMANAGER', 5);
 define('GROUP_GOD', 6);
 
-define('SHOW_TESTSERVER', 1);
+define('SHOW_TESTSERVER', 0);
 define('SHOW_TICKETS', 1);
+define('SHOW_BUYTICKET', 0);
+define('SHOW_ITEMSHOP', 0);
+define('SHOW_DARGHOPEDIA', 0);
 
 define('ENCRYPT_TYPE', 'md5');
 define('RECOMENDED_CHANGEPASS_PERIOD', '30');
@@ -69,7 +76,8 @@ define('SMTP_PORT', 587);
 define('SMTP_USER', 'darghos.net@noip-smtp');
 define('SMTP_PASS', '***REMOVED***');
 
-define('GLOBAL_URL', 'http://ot.darghos.com');
+define('GLOBAL_URL', 'http://elerian.darghos.com');
+define('SERVER_NAME', 'Elerian');
 define('STATUS_UPDATE', 60);
 define('SCHEDULER_EMAILCHANGER', 5);
 

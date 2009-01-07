@@ -221,7 +221,7 @@ elseif($_REQUEST['step'] == 3)
 		$player->setData("town_id", $g_residence[$_POST['residence']]);	
 		$player->setData("created", time());		
 		
-		$player->setLook("DEFAULT");
+		$player->setLook("default");
 		
 		$player->saveNew();
 	

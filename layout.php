@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Darghos Server</title>
+<title>Darghos - <? echo SERVER_NAME;?> Server</title>
 <meta name="keywords" content="OtServ, tibia, server, otserver, ots, open tibia server, open tibia, games, mmorpg" />
 <meta name="author" content="UltraxSoft" />
 <meta name="description" content="Darghos é um Open Tibia RPG-Online gratuito, venha conhecer este magnifico projeto!">
@@ -83,12 +83,17 @@ echo '
 		<td class=menuCenter>
 			<a href="?page=community.lastKills">'.$lang['last_kills'].'</a>
 		</td>
-	</tr>	
-	<tr>
-		<td class=menuCenter>
-			<a href="?page=darghopedia">'.$lang['darghopedia'].'</a>
-		</td>
-	</tr>	
+	</tr>';
+	if(SHOW_DARGHOPEDIA == 1)	
+	{
+		echo '
+		<tr>
+			<td class=menuCenter>
+				<a href="?page=darghopedia">'.$lang['darghopedia'].'</a>
+			</td>
+		</tr>';
+	}
+	echo '
 	<tr>
 		<td class=menuDown>
 			<a href="?page=community.polls">'.$lang['imagens_enquetes'].'</a>
@@ -97,7 +102,7 @@ echo '
 </table>
 
 <br>';
-$DB->query("SELECT status, players, server_ip, server_port, server_id, server_name FROM site.servers_status");	
+$DB->query("SELECT status, players, server_ip, server_port, server_id, server_name, version FROM site.servers_status");	
 while($fetch = $DB->fetch())
 {
 	$i++;
@@ -112,7 +117,7 @@ while($fetch = $DB->fetch())
 		$serversstatus .= '
 			Nome: <b>'.$fetch->server_name.'</b><br>
 			IP: <b><font size="1">'.$fetch->server_ip.'</font></b><br>
-			Versão: <b>8.11</b><br>
+			Versão: <b>'.$fetch->version.'</b><br>
 			Porta: <b>'.$fetch->server_port.'</b><br><br>	
 				
 			<table class=status2 width="90%" border="0" cellspacing="0" cellpadding="0">
@@ -197,14 +202,14 @@ if(Account::isPremium($account))
 	<tr>
 		<td class=menuCenter><a href="?page=screenshot.post"><b>'.$lang['post_screenshot'].'</b></a></td>
 	</tr>';
-	
-	if(SHOW_TICKETS == 1)
-	{
-		$accountCountent .= '<tr>
-			<td class=menuCenter><a href="?page=account.viewTickets"><b>Meus Bilhetes</b></a></td>
-		</tr>';
-	}
 }	
+
+if(SHOW_TICKETS == 1)
+{
+	$accountCountent .= '<tr>
+		<td class=menuCenter><a href="?page=account.viewTickets"><b>Meus Bilhetes</b></a></td>
+	</tr>';
+}
 
 	$accountCountent .= '
 	<tr>
@@ -397,11 +402,20 @@ echo '
       </td>
   </tr>
 </table>
-<table background="images/bk_down.jpg" width="1004px" height="200px">
-<tr><td>
-</td></tr>
+
+<table>
+	<tr>
+		<td>
+			<img src="images/bk_down.jpg" width="1004px" height="200px" border="0" usemap="#ultraxsoft">
+		</td>
+	</tr>
 </table>
 </center>
+
+<map id ="ultraxsoft" name="ultraxsoft">
+  <area shape ="rect" coords ="275,90,735,115" href ="http://www.ultraxsoft.com" alt="UltraxSoft" />
+</map>
+
 </body>
 </html>			
 

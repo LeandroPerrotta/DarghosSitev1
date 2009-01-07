@@ -10,7 +10,7 @@ $account = $engine->loadClass('Accounts');
 $account->loadByNumber($_SESSION['account']);
 
 $query2 = mysql_query("SELECT * FROM `accounts` WHERE (`id` = '".$acc."') ") or die(mysql_error());
-$premiumact_query = mysql_query("SELECT * FROM `premium` WHERE (`account_id` = '".$acc."' and premstatus = '0') ") or die(mysql_error());
+$premiumact_query = mysql_query("SELECT * FROM site.`payments` WHERE (`account_id` = '".$acc."' and status = '0') ") or die(mysql_error());
 
 while($sql2 = mysql_fetch_array($query2))
 {			
@@ -50,8 +50,13 @@ while($sql2 = mysql_fetch_array($query2))
 	{
 		$changeSex = '<a href="?page=character.changeSex"><img align="left" src="'.$changeSex_button.'" border="0"></a>';
 		$changeName = '<a href="?page=character.changeName"><img align="left" src="'.$imagedir.'changeName.gif" border="0"></a>';
-		$shopButton = '<a href="?page=character.getBeneficts"><img align="left" src="'.$imagedir.'shopping.gif" border="0"></a>';
-		$itemButton = '<a href="?page=character.itemShop"><img align="left" src="'.$imagedir.'item_shop.gif" border="0"></a>';
+		
+		if(SHOW_ITEMSHOP == 1)
+		{
+			$shopButton = '<a href="?page=character.getBeneficts"><img align="left" src="'.$imagedir.'shopping.gif" border="0"></a>';
+			$itemButton = '<a href="?page=character.itemShop"><img align="left" src="'.$imagedir.'item_shop.gif" border="0"></a>';
+		}
+		
 		$getTutor = '<a href="?page=character.getTutor"><img align="left" src="'.$imagedir.'get_a_tutor.gif" border="0"></a>';
 	}	
 	
@@ -81,8 +86,8 @@ while($sql2 = mysql_fetch_array($query2))
 		echo '<center><table border="0" bgcolor="black" width="95%" CELLSPACING="1" CELLPADDING="2">';
 		echo '
 		<tr class=rank2><td colspan=2>Aceitar Premium Account</td></tr>
-		<tr class=rank1><td width="25%">Numero de dias:</td><td>'.$premiumact['premdays'].'</td></tr>
-		<tr class=rank1><td width="25%">Liberada em:</td><td>'.date('d/m/Y - H:i',$premiumact['date']).'</td></tr>
+		<tr class=rank1><td width="25%">Numero de dias:</td><td>'.$premiumact['period'].'</td></tr>
+		<tr class=rank1><td width="25%">Liberada em:</td><td>'.date('d/m/Y - H:i',$premiumact['activation']).'</td></tr>
 		<tr class=rank1><td colspan=2><b>Parabens!!</b><br>
 		Está premium account foi ativa com sucesso! Agora você está a poucos passos de tudo que o Darghos pode-lhe oferecer!
 		Para ativar sua premium account, apenas clique no botão abaixo "Aceitar Premium Account" e pronto!<br><br>

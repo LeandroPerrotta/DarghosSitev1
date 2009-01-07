@@ -1,7 +1,7 @@
 <?
 if($engine->loggedIn())
 {
-	if(Account::isPremium($account))
+	if(Account::isPremium($account) AND SHOW_ITEMSHOP == 1)
 	{
 		echo '<tr><td class=newbar><center><b>:: Shopping ::</td></tr>';
 		echo '<tr><td class=newtext><br><center>';		
@@ -10,19 +10,16 @@ if($engine->loggedIn())
 		{
 			$bless = $_POST['bless'];
 			$promotion = $_POST['promotion'];
-			$rank = $_POST['rank'];
-			$pvp = $_POST['pvp'];
+			$resetFrags = $_POST['resetFrags'];
 			
 			if($bless == 1)
 				$prem['bless'] = 10;
 			if($promotion == 1)	
 				$prem['promotion'] = 5;
-			if($rank == 1)	
-				$prem['rank'] = 10;
-			if($pvp == 1)	
-				$prem['pvp'] = 20;				
+			if($resetFrags == 1)	
+				$prem['resetFrags'] = 15;				
 				
-			$looseDays = $prem['bless'] + $prem['promotion'] + $prem['rank'] + $prem['pvp'];
+			$looseDays = $prem['bless'] + $prem['promotion'] + $prem['resetFrags'];
 			
 			
 			$error = 0;
@@ -80,10 +77,8 @@ if($engine->loggedIn())
 					Shop::giveBless($_POST['name']);
 				if($promotion == 1)	
 					Shop::givePromotion($_POST['name']);
-				if($rank == 1)	
-					Shop::giveRank($_POST['name']);
-				if($pvp == 1)	
-					Shop::changePvp($_POST['name']);					
+				if($resetFrags == 1)	
+					Shop::resetFrags($_POST['name']);					
 					
 				Account::removePremium($looseDays,$account);	
 					
@@ -112,9 +107,7 @@ if($engine->loggedIn())
 			echo '<tr><td width="5%" class=rank1></td><td class=rank1><b>Benefit</td><td width="15%" class=rank1><b>Price</td></tr>';
 			echo '<tr class=rank3><td><input type="checkbox" name="bless" value="1"></td><td>All blessing\'s</td><td>10 days</td></tr>';
 			echo '<tr class=rank1><td><input type="checkbox" name="promotion" value="1"></td><td>Promotion</td><td>5 days</td></tr>';
-			echo '<tr class=rank3><td></td><td>Change Player vs Player mode of my character</td><td>20 days</td></tr>';
-			echo '<tr class=rank1><td></td><td>Superior rank/status (Sir for male and Lady for female)</td><td>10 days</td></tr>';			
-			echo '<tr class=rank3><td></td><td>Reserved House</td><td>XX days</td></tr>';
+			echo '<tr class=rank1><td><input type="checkbox" name="resetFrags" value="1"></td><td>Limpas todas Frags de um personagem (incluindo red skulls)</td><td>15 days</td></tr>';
 			echo '</table><br>';
 			echo '<center><table width="60%" BORDER="0" CELLSPACING="1" CELLPADDING="4">';
 			echo '<tr class=rank2><td colspan=2>Step 2/2: </td></tr>';		

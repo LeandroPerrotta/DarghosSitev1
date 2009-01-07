@@ -5,7 +5,7 @@ echo '<center><table width=95% border=0>';
 echo ''.obtainText("SUPPORT_DESC", $lang['lang']).'';
 echo '</table>';
 
-$getAdminquery = mysql_query("SELECT * FROM `players` WHERE `group_id` = '6' and `special_hide` = '0' ORDER BY name asc") or die(mysql_error());
+$getAdminquery = mysql_query("SELECT * FROM `players` WHERE `group_id` = '6' ORDER BY name asc") or die(mysql_error());
 echo '<br><center><table width="85%" border="0" bgcolor="black" cellpadding="2" cellspacing="1">';
 echo '<tr class="rank2"><td colspan="3"><b>'.$lang['administrator'].'</td></tr>';
 echo '<tr class="rank3"><td><b>'.$lang['member_name'].':</td><td width="15%"></td></tr>';
@@ -21,7 +21,7 @@ while($fetch = mysql_fetch_object($getAdminquery))
 
 echo '</table>';		
 
-$getCMquery = mysql_query("SELECT * FROM `players` WHERE `group_id` = '5' and `special_hide` = '0' ORDER BY name asc") or die(mysql_error());
+$getCMquery = mysql_query("SELECT * FROM `players` WHERE `group_id` = '5' ORDER BY name asc") or die(mysql_error());
 echo '<br><center><table width="85%" border="0" bgcolor="black" cellpadding="2" cellspacing="1">';
 echo '<tr class="rank2"><td colspan="3"><b>'.$lang['community_manager'].'</td></tr>';
 echo '<tr class="rank3"><td><b>'.$lang['member_name'].':</td><td width="15%"></td></tr>';
@@ -37,7 +37,7 @@ while($fetch = mysql_fetch_object($getCMquery))
 
 echo '</table>';	
 
-$getGMquery = mysql_query("SELECT * FROM `players` WHERE `group_id` = '4' and `special_hide` = '0' ORDER BY name asc") or die(mysql_error());
+$getGMquery = mysql_query("SELECT * FROM `players` WHERE `group_id` = '4' ORDER BY name asc") or die(mysql_error());
 echo '<br><center><table width="85%" border="0" bgcolor="black" cellpadding="2" cellspacing="1">';
 echo '<tr class="rank2"><td colspan="3"><b>'.$lang['game_master'].':</td></tr>';
 echo '<tr class="rank3"><td><b>'.$lang['member_name'].':</td><td width="15%"></td></tr>';

@@ -39,3 +39,15 @@ Bem vindo a Darghopédia! Esta é uma area dedicada a todo conteudo do jogo, o Dar
 <br>O Darghos possui mais de 80 NPC's unicos espalhados pelo mapa, em cidades, montanhas, cavernas, planicies e cada um deles exerce um papel no roteiro do jogo, alguns são negociantes de armas e equipamentos, outros de artigos magicos, alguns vendendores de comestiveis, e ainda existe NPC's sabios ou exploradores que podem lhe dar uma importante informação sobre uma missão entre outras funções. Para falar com um NPC você deve começar dizendo um "hi", após isso você pode ter uma série de novas palavras que um NPC pode lhe responder como "job","offer","mission" e "addons" entre outros.<br><br>
 Para facilitar a vida dos jogadores nos elaboramos uma lista com os todos equipamentos que cada NPC dentro do jogo compra de você, assim você pode fazer uma caçada e guardar os equipamentos mais valiosos obtidos e vender a um NPC e conseguir algum dinheiro, os jogadores mais experientes ainda usam a tecnica de "loot-bag" para coletar a maior quantidade dos items que os monstros "dropam" e assim conseguir mais dinheiro vendendo aos NPCs. Para checar a nossa lista clique <a href="?page=darghopedia.npcs">aqui</a>.</td></tr>
 </table><br>
+
+<table border="0" width="95%" CELLSPACING="1" CELLPADDING="4">
+<tr class=rank2><td><b>Itens auxiliaries/adicionais</a></td></tr>
+<tr class=rank3><td>Em nosso game update para versão 8.31, com muito prazer, foi implementado no jogo todos itens quais incrementam níveis mágicos, de skills, de proteções entre outros. Basta você ter em mãos o item, quando obter ele é só por em seu slot(inventario) adequado e você perceberá que irá ocorrer uma modificação ou em seus skills, magic level, isso vai depender de qual item você estará usando.
+No momento, o Darghos libera para seus jogadores a compra dos itens adicionais, pelo <a href="?page=character.itemShop">Item Shop</a></td></tr>
+</table><br>
+
+
+
+
+
+

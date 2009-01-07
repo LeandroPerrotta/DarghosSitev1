@@ -3,13 +3,11 @@ echo'<center>
 <tr><td class=newbar><center><b>:: '.$lang['news_title'].' ::</td></tr>
 <tr><td class=newtext><center>
 <script type="text/javascript" src="functions.js"></script>';
-
 	
-	$tickers = mysql_query('SELECT * FROM site.news_tickers WHERE hide_ticker != 1 ORDER BY date DESC LIMIT 5') or die(mysql_error());
+	$query = $db_mysql->query('SELECT * FROM fastnews ORDER BY date DESC LIMIT 5');
 	$number_of_tickers = 0;
 	
-
-	while($ticker = mysql_fetch_object($tickers)) 
+	while($ticker = $query->fetch()) 
 	{
 		if(is_int($number_of_tickers / 2)) 
 		{
@@ -26,11 +24,11 @@ echo'<center>
 		
 		<div id="TickerEntry-'.$number_of_tickers.'-ShortText">
 		<img onclick="TickerAction("TickerEntry-'.$number_of_tickers.'")" src="images/plus.gif">
-		<b>'.date("j M Y", $ticker->date).' -</b> '.stripslashes(short_text($ticker->text, 60)).'</div>
+		<b>'.date("j M Y", $ticker->date).' -</b> '.stripslashes(short_text($ticker->new_br, 60)).'</div>
 		
 		<div id="TickerEntry-'.$number_of_tickers.'-FullText" style="display:none;">				
 		<img onclick="TickerAction("TickerEntry-'.$number_of_tickers.'")" src="images/minus.gif">
-		<b>'.date("j M Y", $ticker->date).' -</b> '.stripslashes($ticker->text).'</div></td></tr>';
+		<b>'.date("j M Y", $ticker->date).' -</b> '.stripslashes($ticker->new_br).'</div></td></tr>';
 		
 		$number_of_tickers++;
 	}
@@ -42,23 +40,23 @@ echo'<center>
 	
 	$bannerChance = rand(1, 200000);
 	
-	if($bannerChance < 15000)
+	if($bannerChance < 200000)
 		echo '<a href="?page=contribute.beneficts"><img border=0 src="images/others/premium.gif"></a>';
 	else	
 		echo '<a href="?page=account.getTickets"><img border=0 src="images/others/tickets.gif"></a>';
 		
-	$sql = mysql_query("SELECT * FROM `news` ORDER by post_data DESC LIMIT 2");
-	while($post_fetch = mysql_fetch_object($sql))
+	$query = $db_mysql->query("SELECT * FROM news ORDER by date DESC LIMIT 2");
+	while($post_fetch = $query->fetch())
 	{
 	
-	$date = date("j/m/Y", ($post_fetch->post_data + 3600 * $Timezone));
+	$date = date("j/m/Y", ($post_fetch->date + 3600 * $Timezone));
 	if($info->ID < 255)
 		$post = nl2br($post_fetch->post);
 	else	
 		$post = $post_fetch->post;
 
 	echo '<br><br><TABLE CELLSPACING=0 CELLPADDING=2 BORDER=0 WIDTH=95% align=center>
-	<tr><td class=newtittle width="20%"><font size=1>'.$date.'</font> - <b>'.$post_fetch->post_title.'</b></td></tr>
+	<tr><td class=newtittle width="20%"><font size=1>'.$date.'</font> - <b>'.$post_fetch->title.'</b></td></tr>
 	<tr class=table><td colspan=2><br><font size=2>';
 $ads = false;	
 if(rand(1, 100000) < 250)
@@ -97,7 +95,6 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 	</table>';
 	}
 
-	
 //Status::updateViews();
 Agendamentos::changeAllEmail();
 Agendamentos::guildsClear();

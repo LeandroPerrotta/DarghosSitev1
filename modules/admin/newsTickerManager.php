@@ -16,7 +16,7 @@ if($engine->accountAccess() >= GROUP_COMMUNITYMANAGER)
 		}	
 		else
 		{
-			mysql_query("INSERT INTO site.news_tickers(author, date, text) VALUES('$autor', '$time', '$ticker')") or die(mysql_error());
+			mysql_query("INSERT INTO site.fastnews(account_poster, date, new_br, new_us) VALUES('$autor', '$time', '$ticker', 'in english')") or die(mysql_error());
 			$condition = 'Sucesso! Notícia postada, clique <a href="index.php">aqui</a> para visualizá-la.';
 		}	
 		

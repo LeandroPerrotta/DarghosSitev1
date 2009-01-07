@@ -14,10 +14,10 @@ if($engine->loggedIn())
 
 		if($_GET['action'] == 'accept')
 		{
-			$premiumact_query = mysql_query("SELECT * FROM `premium` WHERE (`account_id` = '".$acc."' and premstatus = '0') ") or die(mysql_error());
+			$premiumact_query = mysql_query("SELECT * FROM site.`payments` WHERE (`account_id` = '".$acc."' and status = '0') ") or die(mysql_error());
 			$premiumact = mysql_fetch_array($premiumact_query);	
 
-			$days = $premiumact['premdays'];
+			$days = $premiumact['period'];
 			
 			$premQtd = mysql_query("SELECT * FROM accounts WHERE id = '".$acc."'");
 			$premQtd_sql = mysql_fetch_array($premQtd);
@@ -31,7 +31,7 @@ if($engine->loggedIn())
 				{				
 					$premmy_up = "UPDATE accounts SET premDays = '".$days."', premFree = '0', lastday = '$date' WHERE id = '".$acc."'";
 					mysql_query($premmy_up) or die(mysql_error());
-					$premiumst = "UPDATE premium SET premstatus = '1' WHERE account_id = '".$acc."' and id = '".$id."'";
+					$premiumst = "UPDATE site.payments SET status = '1' WHERE account_id = '".$acc."' and id = '".$id."'";
 					mysql_query($premiumst) or die(mysql_error());	
 				}
 				else
@@ -39,7 +39,7 @@ if($engine->loggedIn())
 					$newPrem = $premNow + $days;
 					$premmy_up = "UPDATE accounts SET premDays = '".$newPrem."', premFree = '0', lastday = '$date' WHERE id = '".$acc."'";
 					mysql_query($premmy_up) or die(mysql_error());
-					$premiumst = "UPDATE premium SET premstatus = '1' WHERE account_id = '".$acc."' and id = '".$id."'";
+					$premiumst = "UPDATE site.payments SET status = '1' WHERE account_id = '".$acc."' and id = '".$id."'";
 					mysql_query($premiumst) or die(mysql_error());
 				}	
 
@@ -59,12 +59,12 @@ if($engine->loggedIn())
 		}
 		elseif($_GET['action'] == 'reject')	
 		{
-			$premiumact_query = mysql_query("SELECT * FROM `premium` WHERE (`account_id` = '".$acc."' and premstatus = '0') ") or die(mysql_error());
+			$premiumact_query = mysql_query("SELECT * FROM site.`payments` WHERE (`account_id` = '".$acc."' and status = '0') ") or die(mysql_error());
 			$premiumact = mysql_fetch_array($premiumact_query);	
 
 			if(mysql_num_rows($premiumact_query) != 0)	
 			{
-				$reject = "UPDATE premium SET premstatus = '2' WHERE account_id = '".$acc."' and id = '".$id."'";
+				$reject = "UPDATE site.payments SET status = '2' WHERE account_id = '".$acc."' and id = '".$id."'";
 				mysql_query($reject) or die(mysql_error());	
 
 				echo '<br><center><table border="0" bgcolor="black" width="95%" CELLSPACING="1" CELLPADDING="2">';

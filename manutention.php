@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Ultraxsoft - Innovation of the games</title>
+<title>Darghos</title>
 <META name="verify-v1" content="uThQU4N3a3z16281fWAYyDbkuf3XhfCdHhpDOulk5gE=" />
 <link rel="stylesheet" href="indexs.css" type="text/css">
 </head>
@@ -18,7 +18,7 @@
 			<? } 
 			else
 			{?>
-			<font color="white" size="4" face="Tahoma"><center><b>Website em Manutenção.</b><br> O nosso website está em menutenção para modificações tecnicas. Entretanto o servidor continua normalmente online (IP: ot.darghos.com Porta: 7171). Previsão para website voltar ao ar: 14:00 (Brasilia).</center>
+			<font color="white" size="4" face="Tahoma"><center><b>Manutenção.</b><br> Estamos em manutenção, voltamos em alguns minutos.</center>
 			<? } ?>
 		</td>
 	</tr>

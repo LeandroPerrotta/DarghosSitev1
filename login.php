@@ -20,12 +20,12 @@ if(is_numeric($account))
 	        $sql = mysql_fetch_assoc($query);
 	        $_SESSION["account"] = $account;
 	        $_SESSION["password"] = $password;
-			Logs::loginTries($account, $password, 1, $ip_addr);
+			//Logs::loginTries($account, $password, 1, $ip_addr);
 			header ("Location: index.php?page=account.main");	
 	    } 
 		else 
 		{
-			Logs::loginTries($account, $password, 0, $ip_addr);
+			//Logs::loginTries($account, $password, 0, $ip_addr);
 	        header ("Location: index.php?page=account.login");
 	    }                
 	} 

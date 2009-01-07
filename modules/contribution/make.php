@@ -221,31 +221,31 @@ if($engine->loggedIn())
 				{				
 					if($_POST['duration'] == 30)
 					{
-						$duration = '1 mes (30 dias)';
+						$duration = 'Contribuição em dias: 30';
 						$price = 'R$ 10,90';
 						$priceValue = 1090;
 					}	
 					elseif($_POST['duration'] == 60)
 					{
-						$duration = '2 meses (60 dias)';
+						$duration = 'Contribuição em dias: 60';				
 						$price = 'R$ 21,80';
 						$priceValue = 2180;
 					}					
 					elseif($_POST['duration'] == 90)
 					{
-						$duration = '3 meses (90 dias)';
+						$duration = 'Contribuição em dias: 90';				
 						$price = 'R$ 32,70';
 						$priceValue = 3270;
 					}	
 					elseif($_POST['duration'] == 180)
 					{
-						$duration = '6 meses (180 dias)';
+						$duration = 'Contribuição em dias: 180';					
 						$price = 'R$ 55,90';
 						$priceValue = 5590;
 					}		
 					elseif($_POST['duration'] == 360)
 					{
-						$duration = '1 ano (360 dias)';
+						$duration = 'Contribuição em dias: 360';				
 						$price = 'R$ 99,90';
 						$priceValue = 9990;
 					}						
@@ -302,6 +302,9 @@ if($engine->loggedIn())
 				</td></tr>';	
 				echo '</table>';	
 				
+				$player_query = mysql_query("SELECT id FROM players WHERE name = '".$_POST['name']."'");
+				$player_id = mysql_fetch_object($player_query)->id;
+				
 				if($_POST['form'] == "paypal")
 				{
 					echo '<form action="https://www.paypal.com/cgi-bin/webscr" method="post">';
@@ -329,9 +332,9 @@ if($engine->loggedIn())
 					echo '<input type="hidden" name="item_valor_1" value="'.$priceValue.'">';
 					echo '<input type="hidden" name="item_frete_1" value="000">';		
 					if($_POST['destiny'] == "me")
-						echo '<input type="hidden" name="ref_transacao" value="Por: '.$account.'">';
+						echo '<input type="hidden" name="ref_transacao" value="'.$account.'">';
 					else
-						echo '<input type="hidden" name="ref_transacao" value="Por: '.$account.' para: '.$_POST['name'].'">';					
+						echo '<input type="hidden" name="ref_transacao" value="'.$player_id.'/'.$account.'/'.SERVER_NAME.'">';					
 				}
 				echo '<br><center><input type="image" value="submit" src="images/confirm.gif"/> <a href="?page=contribute.informations"><img src="images/back.gif" border="0"></a>';	
 				echo '</form>';

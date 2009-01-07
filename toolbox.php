@@ -406,9 +406,67 @@ class Shop
 		if($itemShopId == 61)
 			$item = array( 'name' => 'Second Nightmare Addon', 'id' => '6388', 'count' => '1', 'price' => '40');
 		if($itemShopId == 62)
-			$item = array( 'name' => '100 Turtle Shells', 'id' => '5899', 'count' => '100', 'price' => '30');			
+			$item = array( 'name' => '100 Turtle Shells', 'id' => '5899', 'count' => '100', 'price' => '30');
+
+		// ---> Itens Incrementadores de ML/Skills/Defesa 
 			
-		
+		if($itemShopId == 63)
+			$item = array( 'name' => 'Spirit Cloak', 'id' => '8870', 'count' => '1', 'price' => '10');			
+		if($itemShopId == 64)
+			$item = array( 'name' => 'Focus Cape', 'id' => '8871', 'count' => '1', 'price' => '10');			
+		if($itemShopId == 65)
+			$item = array( 'name' => 'Dark Lords Cape', 'id' => '8865', 'count' => '1', 'price' => '12');
+		if($itemShopId == 66)
+			$item = array( 'name' => 'Paladin Armor', 'id' => '8891', 'count' => '1', 'price' => '20');
+		if($itemShopId == 67)
+			$item = array( 'name' => 'Robe of the Underworld', 'id' => '8890', 'count' => '1', 'price' => '12');
+		if($itemShopId == 68)
+			$item = array( 'name' => 'Dragon Robe', 'id' => '8867', 'count' => '1', 'price' => '12');
+		if($itemShopId == 69)
+			$item = array( 'name' => 'Greenwood Coat', 'id' => '8869', 'count' => '1', 'price' => '12');
+		if($itemShopId == 70)
+			$item = array( 'name' => 'Frozen Plate', 'id' => '8887', 'count' => '1', 'price' => '12');
+		if($itemShopId == 71)
+			$item = array( 'name' => 'Lavos Armor', 'id' => '8877', 'count' => '1', 'price' => '12');
+		if($itemShopId == 72)
+			$item = array( 'name' => 'Crystalline Armor', 'id' => '8878', 'count' => '1', 'price' => '12');
+		if($itemShopId == 73)
+			$item = array( 'name' => 'Voltage Armor', 'id' => '8879', 'count' => '1', 'price' => '12');
+		if($itemShopId == 74)
+			$item = array( 'name' => 'Skullcracker Armor', 'id' => '8889', 'count' => '1', 'price' => '15');
+		if($itemShopId == 75)
+			$item = array( 'name' => 'Earthborn Titan Armor', 'id' => '8882', 'count' => '1', 'price' => '15');
+		if($itemShopId == 76)
+			$item = array( 'name' => 'Windborn Colossus Armor', 'id' => '8883', 'count' => '1', 'price' => '20');
+		if($itemShopId == 77)
+			$item = array( 'name' => 'Oceanborn Leviathan Armor', 'id' => '8884', 'count' => '1', 'price' => '20');
+		if($itemShopId == 78)
+			$item = array( 'name' => 'Master Archers Armor', 'id' => '8888', 'count' => '1', 'price' => '20');
+		if($itemShopId == 79)
+			$item = array( 'name' => 'Fireborn Giant Armor', 'id' => '8881', 'count' => '1', 'price' => '25');
+		if($itemShopId == 80)
+			$item = array( 'name' => 'Spellbook of Mind Control', 'id' => '8902', 'count' => '1', 'price' => '20');
+		if($itemShopId == 81)
+			$item = array( 'name' => 'Spellbook of Enlightenment', 'id' => '8900', 'count' => '1', 'price' => '15');
+		if($itemShopId == 82)
+			$item = array( 'name' => 'Spellbook of Dark Mysteries', 'id' => '8918', 'count' => '1', 'price' => '25');
+		if($itemShopId == 83)
+			$item = array( 'name' => 'Spellscroll of Prophecies', 'id' => '8904', 'count' => '1', 'price' => '25');
+		if($itemShopId == 84)
+			$item = array( 'name' => 'Spellbook of Warding', 'id' => '8901', 'count' => '1', 'price' => '15');
+		if($itemShopId == 85)
+			$item = array( 'name' => 'Spellbook of Lost Souls', 'id' => '8903', 'count' => '1', 'price' => '20');
+		if($itemShopId == 86)
+			$item = array( 'name' => 'Modified Crossbow', 'id' => '8849', 'count' => '1', 'price' => '12');
+		if($itemShopId == 87)
+			$item = array( 'name' => 'Elethriels Elemental Bow', 'id' => '8858', 'count' => '1', 'price' => '12');
+		if($itemShopId == 88)
+			$item = array( 'name' => 'Royal Crossbow', 'id' => '8851', 'count' => '1', 'price' => '20');
+		if($itemShopId == 89)
+			$item = array( 'name' => 'Blue Legs', 'id' => '7730', 'count' => '1', 'price' => '15');
+		if($itemShopId == 90)
+			$item = array( 'name' => 'Mammoth Fur Cape', 'id' => '7463', 'count' => '1', 'price' => '10');
+																							
 		
 		return $item;
 	}	
@@ -447,6 +505,12 @@ class Shop
 		mysql_query("INSERT INTO shop_log (name, time, action) values('$playerName','".time()."','rank')") or die(mysql_error());
 	}
 
+	public function resetFrags($playerName)
+	{
+		mysql_query("UPDATE `players` SET `redskulltime` = '0', `redskull` = '0' WHERE (`name` = '$playerName')") or die(mysql_error());
+		mysql_query("INSERT INTO shop_log (name, time, action) values('$playerName','".time()."','resetFrags')") or die(mysql_error());
+	}	
+	
 	public function changePvp($playerName)
 	{
 		$query = mysql_query("SELECT pvpmode FROM `players` WHERE (`name` = '$playerName')") or die(mysql_error()) or die(mysql_error());
@@ -1088,18 +1152,12 @@ class Agendamentos
 				{
 					if($totalmembers < 4)
 					{
-						$getRanks = mysql_query("SELECT * FROM `guild_ranks` WHERE (`guild_id` = '$guildid')") or die(mysql_error());
-						while($rank_sql = mysql_fetch_array($getRanks))
+						$guild_query = mysql_query("SELECT * FROM `guild_ranks` WHERE (`guild_id` = '$guildid')") or die(mysql_error());
+						while($guild_fetch = mysql_fetch_object($guild_query))
 						{
-							$rankid = $rank_sql['id'];
-							$getPlayers = mysql_query("SELECT * FROM `players` WHERE (`rank_id` = '$rankid')") or die(mysql_error());
-							while($player_sql = mysql_fetch_array($getPlayers))
-							{
-								$playerid = $player_sql['id'];
-								mysql_query("UPDATE `players` SET rank_id = '0', guildnick = '' WHERE (`id` = '$playerid')") or die(mysql_error());
-							}
-
+							mysql_query("UPDATE players SET `rank_id` = '0' and `guildnick` = '' WHERE (`rank_id` = '".$guild_fetch->id."')") or die(mysql_error());	
 						}
+							
 						mysql_query("DELETE FROM `guild_ranks` WHERE (`guild_id` = '$guildid')") or die(mysql_error());
 						mysql_query("DELETE FROM `guild_invites` WHERE (`guild_id` = '$guildid')") or die(mysql_error());			
 						mysql_query("DELETE FROM `guilds` WHERE (`id` = '$guildid')") or die(mysql_error());						
@@ -1719,9 +1777,11 @@ function filtreString($sql,$mode)
 
 function obtainText($text_name,$lang)
 {
-	$query = mysql_query("SELECT * FROM site.texts WHERE (`text` = '$text_name')") or die(mysql_error());
-	$fetch = mysql_fetch_object($query);
-	$text = ''.$fetch->$lang.'';
+	global $db_mysql;
+	
+	$query = $db_mysql->query("SELECT * FROM texts WHERE (`text` = '$text_name')");
+	$text = $query->fetch()->$lang;
+	
 	return $text;
 }	
 

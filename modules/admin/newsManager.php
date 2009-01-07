@@ -9,7 +9,7 @@ if($engine->accountAccess() >= GROUP_COMMUNITYMANAGER)
 
 	if($editnew)
 	{
-		$query_edit = mysql_query("SELECT * FROM `news` WHERE(`ID` = '$editnew')") or die(mysql_error());
+		$query_edit = mysql_query("SELECT * FROM site.`news` WHERE(`ID` = '$editnew')") or die(mysql_error());
 		$fetch_edit = mysql_fetch_object($query_edit);
 		echo '<form action="?page=admin.newsManager&action=edit" method="POST">';
 
@@ -19,7 +19,7 @@ if($engine->accountAccess() >= GROUP_COMMUNITYMANAGER)
 		echo '</table>';		
 				
 		echo '<br><center><table width="95%" bgcolor="black" BORDER="0" CELLSPACING="1" CELLPADDING="4">';	
-		echo '<tr><td width="25%" class=rank1>Titulo:</td><td width="75%" class=rank1><input type="text" class="login" name="title" VALUE="'.$fetch_edit->post_title.'" size ="40" MAXLENGTH="39"></td></tr>';
+		echo '<tr><td width="25%" class=rank1>Titulo:</td><td width="75%" class=rank1><input type="text" class="login" name="title" VALUE="'.$fetch_edit->title.'" size ="40" MAXLENGTH="39"></td></tr>';
 		echo '<tr><td colspan="2" width="25%" class=rank1>';
 		$oFCKeditor = new FCKeditor('FCKeditor1') ;
 		$oFCKeditor->BasePath = 'fckeditor/' ;
@@ -41,7 +41,7 @@ if($engine->accountAccess() >= GROUP_COMMUNITYMANAGER)
 			$tittle = $_POST['title'];
 			$post = $_POST['FCKeditor1'];
 			$preview = $_POST['preview'];
-			mysql_query("UPDATE news SET post_title = '$tittle', post = '$post' WHERE id = '".$_POST['new_id']."'") or die(mysql_error());
+			mysql_query("UPDATE site.news SET title = '$tittle', post = '$post' WHERE id = '".$_POST['new_id']."'") or die(mysql_error());
 
 			echo '<br><center><table border="0" width="95%" CELLSPACING="1" CELLPADDING="2">
 			Noticia Editada com Sucesso!
@@ -81,7 +81,7 @@ if($engine->accountAccess() >= GROUP_COMMUNITYMANAGER)
 			}	
 			else
 			{
-				mysql_query("INSERT INTO news(autor, post, post_title, post_data,new_status) VALUES('$autor', '$news', '$titulo', '$time','$preview')") or die(mysql_error());
+				mysql_query("INSERT INTO site.news(author_account, post, title, date) VALUES('$autor', '$news', '$titulo', '$time')") or die(mysql_error());
 				$condition = 'Sucesso! Notícia postada, clique <a href="index.php">aqui</a> para visualizá-la.';
 			}	
 			

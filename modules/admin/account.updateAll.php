@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
 	}	
 	else
 	{
+		set_time_limit(60*10); 	
 		$query = mysql_query("SELECT id, premdays, lastday FROM accounts WHERE premdays > 0");
 
 		while($fetch = mysql_fetch_object($query))

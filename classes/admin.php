@@ -1,11 +1,4 @@
 <?
-class News
-{
-	public function deleteNew($id)
-	{
-		mysql_query("DELETE FROM `news` WHERE (`ID` = '$id')");
-	}	
-}
 class Deletion
 {
 	public function player($name,$type)
