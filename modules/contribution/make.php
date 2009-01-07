@@ -316,9 +316,9 @@ if($engine->loggedIn())
 					echo '<input type="hidden" name="item_name" value="'.$duration.'">';
 					echo '<input type="hidden" name="amount" value="'.$priceValue.'">';
 					if($_POST['destiny'] == "me")
-						echo '<input type="hidden" name="on0" value="Por: '.$account.'">';
+						echo '<input type="hidden" name="on0" value="Por: '.$account.' server: '.SERVER_NAME.'">';
 					else
-						echo '<input type="hidden" name="on0" value="Por: '.$account.' para: '.$_POST['name'].'">';					
+						echo '<input type="hidden" name="on0" value="Por: '.$account.' para: '.$_POST['name'].' server: '.SERVER_NAME.'">';					
 				}
 				elseif($_POST['form'] == "pagseguro")
 				{
@@ -332,7 +332,7 @@ if($engine->loggedIn())
 					echo '<input type="hidden" name="item_valor_1" value="'.$priceValue.'">';
 					echo '<input type="hidden" name="item_frete_1" value="000">';		
 					if($_POST['destiny'] == "me")
-						echo '<input type="hidden" name="ref_transacao" value="'.$account.'">';
+						echo '<input type="hidden" name="ref_transacao" value="'.$account.'/'.SERVER_NAME.'">';
 					else
 						echo '<input type="hidden" name="ref_transacao" value="'.$player_id.'/'.$account.'/'.SERVER_NAME.'">';					
 				}
