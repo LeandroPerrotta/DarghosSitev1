@@ -14,10 +14,10 @@ if($engine->loggedIn())
 
 		if($_GET['action'] == 'accept')
 		{
-			$premiumact_query = mysql_query("SELECT * FROM site.`payments` WHERE (`account_id` = '".$acc."' and status = '0') ") or die(mysql_error());
-			$premiumact = mysql_fetch_array($premiumact_query);	
+			$premiumact_query = $db_mysql->query("SELECT * FROM payments WHERE (`account_id` = '".$acc."' and server = '".SERVER_NAME."'and status = '0') ");
+			$premiumact = $premiumact_query->fetch();	
 
-			$days = $premiumact['period'];
+			$days = $premiumact->period;
 			
 			$premQtd = mysql_query("SELECT * FROM accounts WHERE id = '".$acc."'");
 			$premQtd_sql = mysql_fetch_array($premQtd);
@@ -25,22 +25,20 @@ if($engine->loggedIn())
 			$premNow = $premQtd_sql['premdays'];
 			$date = time();
 
-			if(mysql_num_rows($premiumact_query) != 0)
+			if($premiumact_query->numRows() != 0)
 			{	
 				if ($premNow == 0)
 				{				
 					$premmy_up = "UPDATE accounts SET premDays = '".$days."', premFree = '0', lastday = '$date' WHERE id = '".$acc."'";
 					mysql_query($premmy_up) or die(mysql_error());
-					$premiumst = "UPDATE site.payments SET status = '1' WHERE account_id = '".$acc."' and id = '".$id."'";
-					mysql_query($premiumst) or die(mysql_error());	
+					$db_mysql->query("UPDATE payments SET status = '1' WHERE account_id = '".$acc."' and id = '".$id."'");
 				}
 				else
 				{
 					$newPrem = $premNow + $days;
 					$premmy_up = "UPDATE accounts SET premDays = '".$newPrem."', premFree = '0', lastday = '$date' WHERE id = '".$acc."'";
 					mysql_query($premmy_up) or die(mysql_error());
-					$premiumst = "UPDATE site.payments SET status = '1' WHERE account_id = '".$acc."' and id = '".$id."'";
-					mysql_query($premiumst) or die(mysql_error());
+					$db_mysql->query("UPDATE payments SET status = '1' WHERE account_id = '".$acc."' and id = '".$id."'");
 				}	
 
 				echo '<br><center><table border="0" bgcolor="black" width="95%" CELLSPACING="1" CELLPADDING="2">';
@@ -59,13 +57,12 @@ if($engine->loggedIn())
 		}
 		elseif($_GET['action'] == 'reject')	
 		{
-			$premiumact_query = mysql_query("SELECT * FROM site.`payments` WHERE (`account_id` = '".$acc."' and status = '0') ") or die(mysql_error());
-			$premiumact = mysql_fetch_array($premiumact_query);	
+			$premiumact_query = $db_mysql->query("SELECT * FROM payments WHERE (`account_id` = '".$acc."' and server = '".SERVER_NAME."'and status = '0') ");
+			$premiumact = $premiumact_query->fetch();	
 
-			if(mysql_num_rows($premiumact_query) != 0)	
+			if($premiumact_query->numRows() != 0)
 			{
-				$reject = "UPDATE site.payments SET status = '2' WHERE account_id = '".$acc."' and id = '".$id."'";
-				mysql_query($reject) or die(mysql_error());	
+				$db_mysql->query("UPDATE payments SET status = '2' WHERE account_id = '".$acc."' and id = '".$id."'");
 
 				echo '<br><center><table border="0" bgcolor="black" width="95%" CELLSPACING="1" CELLPADDING="2">';
 				echo '

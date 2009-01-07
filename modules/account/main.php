@@ -10,7 +10,7 @@ $account = $engine->loadClass('Accounts');
 $account->loadByNumber($_SESSION['account']);
 
 $query2 = mysql_query("SELECT * FROM `accounts` WHERE (`id` = '".$acc."') ") or die(mysql_error());
-$premiumact_query = mysql_query("SELECT * FROM site.`payments` WHERE (`account_id` = '".$acc."' and status = '0') ") or die(mysql_error());
+$premiumact_query = $db_mysql->query("SELECT * FROM payments WHERE (`account_id` = '".$acc."' and server = '".SERVER_NAME."' and status = '0') ");
 
 while($sql2 = mysql_fetch_array($query2))
 {			
@@ -79,15 +79,15 @@ while($sql2 = mysql_fetch_array($query2))
 			$premiumTest = "Requer um personagem com nivel 100 ou superior nesta conta.";
 	}
 
-	while($premiumact = mysql_fetch_array($premiumact_query))
+	while($premiumact = $premiumact_query->fetch())
 	{
 		echo '<form>';
-		$prem_id = $premiumact['id'];
+		$prem_id = $premiumact->id;
 		echo '<center><table border="0" bgcolor="black" width="95%" CELLSPACING="1" CELLPADDING="2">';
 		echo '
 		<tr class=rank2><td colspan=2>Aceitar Premium Account</td></tr>
-		<tr class=rank1><td width="25%">Numero de dias:</td><td>'.$premiumact['period'].'</td></tr>
-		<tr class=rank1><td width="25%">Liberada em:</td><td>'.date('d/m/Y - H:i',$premiumact['activation']).'</td></tr>
+		<tr class=rank1><td width="25%">Numero de dias:</td><td>'.$premiumact->period.'</td></tr>
+		<tr class=rank1><td width="25%">Liberada em:</td><td>'.date('d/m/Y - H:i',$premiumact->activation).'</td></tr>
 		<tr class=rank1><td colspan=2><b>Parabens!!</b><br>
 		Está premium account foi ativa com sucesso! Agora você está a poucos passos de tudo que o Darghos pode-lhe oferecer!
 		Para ativar sua premium account, apenas clique no botão abaixo "Aceitar Premium Account" e pronto!<br><br>
