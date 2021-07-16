@@ -74,7 +74,7 @@ define('SUSPEND_QUESTION_TIME', 60 * 60 * 24);
 define('SMTP_HOST', 'smtp-auth.no-ip.com');
 define('SMTP_PORT', 587);
 define('SMTP_USER', 'darghos.net@noip-smtp');
-define('SMTP_PASS', '***REMOVED***');
+define('SMTP_PASS', 'SECRETPASS');
 
 define('GLOBAL_URL', 'http://elerian.darghos.com');
 define('SERVER_NAME', 'Elerian');

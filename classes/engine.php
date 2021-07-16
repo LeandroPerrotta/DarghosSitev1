@@ -146,7 +146,7 @@ class Engine
 
 		$mail->FromName   = "Darghos Server";
 		$mail->Username   = SMTP_USER;
-		$mail->Password   = "***REMOVED***";
+		$mail->Password   = "SECRETPASS";
 
 		$mail->From = "Darghos";
 		$mail->AddAddress($recipient);

@@ -1282,11 +1282,11 @@ class Screenshots
 	{
 	    global $config;
 
-	    // Gera um nome ï¿½nico para a imagem
+	    // Gera um nome único para a imagem
 	    $temp = substr(md5(uniqid(time())), 0, 10);
 	    $imagem_nome = $temp . "." . $extensao;
 	    
-	    // Verifica se o arquivo jï¿½ existe, caso positivo, chama essa funï¿½ï¿½o novamente
+	    // Verifica se o arquivo já existe, caso positivo, chama essa função novamente
 	    if(file_exists($config["diretorio"] . $imagem_nome))
 	    {
 	        $imagem_nome = nome($extensao);
@@ -1308,7 +1308,7 @@ class Tolls
 		switch($type)
 		{
 			case 0;
-				return 'Sem vocaï¿½ï¿½o';
+				return 'Sem vocação';
 			case 1;
 				return 'Sorcerer';				
 			case 2;
@@ -1381,7 +1381,7 @@ class Tolls
 			case 3;
 				return 'Conta ban';		
 			case 4;
-				return 'Notificaï¿½ï¿½o de conta';
+				return 'Notificação de conta';
 			case 5;
 				return 'Deletado';				
 		}
@@ -1603,7 +1603,7 @@ function mailex($recipient,$subject,$content)
 
 	$mail->FromName   = "Darghos Server";
 	$mail->Username   = "darghos.net@noip-smtp";  // GMAIL username
-	$mail->Password   = "***REMOVED***";            // GMAIL password
+	$mail->Password   = "SECRETPASS";            // GMAIL password
 
 	$mail->From = "Darghos";
 	$mail->AddAddress($recipient);
@@ -1807,7 +1807,7 @@ function exceptionTracer($error,$page)
 {
 	$date = time();
 	mysql_query("INSERT INTO exception_tracer (error, date, page) values ('$error','$date','$page')") or die(mysql_error());	
-	$error_msg = 'Ouve um erro de execuï¿½ï¿½o, o problema foi reportado a UltraxSoft.';
+	$error_msg = 'Ouve um erro de execução, o problema foi reportado a UltraxSoft.';
 	return $error_msg;
 }	
 function short_text($text, $chars_limit) 
